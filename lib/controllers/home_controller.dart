@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 
 class HomeController extends GetxController {
@@ -16,7 +17,7 @@ class HomeController extends GetxController {
   getUserName() async {
     var n = await fireStore
         .collection(sellerCollection)
-        .where('id', isEqualTo: currentUser!.uid)
+        .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
       if (value.docs.isNotEmpty) {
@@ -29,7 +30,7 @@ class HomeController extends GetxController {
   getUserImage() async {
     var img = await fireStore
         .collection(sellerCollection)
-        .where('id', isEqualTo: currentUser!.uid)
+        .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
       if (value.docs.isNotEmpty) {

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/auth_controller.dart';
 import 'package:fresh_om_seller/controllers/profile_controller.dart';
@@ -53,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
         children: [
           //top profile details row
           FutureBuilder(
-            future: FireStoreServices.getProfile(currentUser!.uid),
+            future: FireStoreServices.getProfile(FirebaseAuth.instance.currentUser!.uid),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {

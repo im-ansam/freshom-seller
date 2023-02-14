@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 FirebaseFirestore fireStore = FirebaseFirestore.instance;
-User? currentUser = auth.currentUser;
+// User? currentUser = auth.currentUser;
 
 //collections
 const sellerCollection = "sellerCollection";

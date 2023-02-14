@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 
 class OrdersController extends GetxController {
@@ -11,7 +12,7 @@ class OrdersController extends GetxController {
   getOrders(data) {
     orders.clear();
     for (var item in data['orders']) {
-      if (item['seller_id'] == currentUser!.uid) {
+      if (item['seller_id'] == FirebaseAuth.instance.currentUser!.uid) {
         orders.add(item);
       }
     }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/firebase_const.dart';
 
 class FireStoreServices {
@@ -28,7 +29,7 @@ class FireStoreServices {
   static getAllMessages() {
     return fireStore
         .collection(chatsCollection)
-        .where('toId', isEqualTo: currentUser!.uid)
+        .where('toId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots();
   }
 
@@ -94,7 +95,7 @@ class FireStoreServices {
       }),
       fireStore
           .collection(chatsCollection)
-          .where('toId', isEqualTo: currentUser!.uid)
+          .where('toId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get()
           .then((value) {
         return value.docs.length;

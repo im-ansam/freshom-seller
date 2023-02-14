@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
 import 'package:fresh_om_seller/utils/reusable_text.dart';
@@ -13,10 +14,11 @@ class VerificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: lightBlue1,
       body: StreamBuilder(
-        stream: FireStoreServices.getUser(currentUser!.uid),
+        stream:
+            FireStoreServices.getUser(FirebaseAuth.instance.currentUser!.uid),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: nicePurple,
               ),
@@ -34,11 +36,11 @@ class VerificationScreen extends StatelessWidget {
                       Dimensions.height10.heightBox,
                       "Huray.. your account is verified you can enter now."
                           .text
-                          .size(20)
+                          .size(Dimensions.fontSize20)
                           .bold
                           .color(niceDarkViolet)
                           .make()
-                          .paddingOnly(left: 20),
+                          .paddingOnly(left: Dimensions.width20),
                       Dimensions.height30.heightBox,
                       headingText(
                               text: "Proceed",

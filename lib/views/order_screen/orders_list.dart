@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/orders_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
@@ -38,7 +39,8 @@ class OrdersList extends StatelessWidget {
         ],
       ),
       body: StreamBuilder(
-        stream: FireStoreServices.getOrders(currentUser!.uid),
+        stream:
+            FireStoreServices.getOrders(FirebaseAuth.instance.currentUser!.uid),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return progressIndicator(nicePurple);

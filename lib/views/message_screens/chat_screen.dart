@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/chats_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
@@ -48,7 +49,7 @@ class ChatScreen extends StatelessWidget {
                                   .mapIndexed((currentValue, index) {
                                 var data = snapshot.data!.docs[index];
                                 return Align(
-                                    alignment: data['uid'] == currentUser!.uid
+                                    alignment: data['uid'] == FirebaseAuth.instance.currentUser!.uid
                                         ? Alignment.centerRight
                                         : Alignment.centerLeft,
                                     child: chatBubble(data));

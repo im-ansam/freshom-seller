@@ -54,13 +54,13 @@ class AuthController extends GetxController {
   // storing user data
   storeUserData({name, password, email, address}) async {
     DocumentReference store =
-        fireStore.collection(sellerCollection).doc(currentUser!.uid);
+        fireStore.collection(sellerCollection).doc(FirebaseAuth.instance.currentUser!.uid);
     store.set({
       'name': name,
       'password': password,
       'email': email,
       'imageUrl': '',
-      'id': currentUser!.uid,
+      'id': FirebaseAuth.instance.currentUser!.uid,
       'added_veg_count': '',
       'added_fruit_count': '',
       'verified': false,

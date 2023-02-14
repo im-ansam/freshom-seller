@@ -33,7 +33,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      "Fresh\'Om"
+                      "Fresh'Om"
                           .text
                           .extraBold
                           .color(Colors.white)
@@ -101,16 +101,18 @@ class _ResetPasswordState extends State<ResetPassword> {
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: Dimensions.width5),
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.email_outlined,
                               color: inactiveTextColor,
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
+                                borderSide:
+                                    const BorderSide(color: Colors.grey),
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.radius35)),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
+                                borderSide:
+                                    const BorderSide(color: Colors.grey),
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.radius35)),
                             hintText: "Recovery email",
@@ -134,7 +136,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.redAccent,
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
@@ -146,7 +148,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                           color: Colors.black.withOpacity(.3),
                           spreadRadius: 1,
                           blurRadius: 1,
-                          offset: Offset(0, 1))
+                          offset: const Offset(0, 1))
                     ]),
                 child: Icon(
                   Icons.arrow_back_rounded,
@@ -179,7 +181,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       color: Colors.black.withOpacity(.3),
                       blurRadius: Dimensions.radius10,
                       spreadRadius: 1.5,
-                      offset: Offset(0, 1))
+                      offset: const Offset(0, 1))
               ]),
           child: Container(
                   height: Dimensions.height60,
@@ -187,7 +189,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.redAccent,
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
@@ -199,10 +201,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                             color: Colors.black.withOpacity(.3),
                             spreadRadius: 1,
                             blurRadius: 1,
-                            offset: Offset(0, 1))
+                            offset: const Offset(0, 1))
                       ]),
                   child: isLoading == true
-                      ? Center(
+                      ? const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),

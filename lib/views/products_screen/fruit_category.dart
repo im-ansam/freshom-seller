@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/products_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
@@ -16,7 +17,7 @@ class FruitCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.find<ProductsController>();
     return StreamBuilder(
-      stream: FireStoreServices.getFruits(currentUser!.uid),
+      stream: FireStoreServices.getFruits(FirebaseAuth.instance.currentUser!.uid),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
           return progressIndicator(nicePurple);

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:fresh_om_seller/const/const.dart';
@@ -37,7 +38,8 @@ class ProductsController extends GetxController {
 
   uploadProductImage() async {
     var fileName = basename(productImage.value);
-    var destination = 'productsImages/sellers/${currentUser?.uid}/$fileName';
+    var destination =
+        'productsImages/sellers/${FirebaseAuth.instance.currentUser?.uid}/$fileName';
     Reference ref = FirebaseStorage.instance.ref().child(destination);
     await ref.putFile(File(productImage.value));
 
@@ -57,7 +59,7 @@ class ProductsController extends GetxController {
       'f_qty': fQtyController.text,
       'f_uploaded_date': time,
       'seller_name': Get.find<HomeController>().username,
-      'seller_id': currentUser!.uid
+      'seller_id': FirebaseAuth.instance.currentUser!.uid
     });
     isLoading(false);
     VxToast.show(context, msg: "Product Uploaded");
@@ -76,7 +78,7 @@ class ProductsController extends GetxController {
       'v_qty': vQtyController.text,
       'v_uploaded_date': time,
       'seller_name': Get.find<HomeController>().username,
-      'seller_id': currentUser!.uid
+      'seller_id': FirebaseAuth.instance.currentUser!.uid
     });
     isLoading(false);
     VxToast.show(context, msg: "Product Uploaded");

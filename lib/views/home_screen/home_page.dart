@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/home_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
@@ -66,7 +67,7 @@ class HomePage extends StatelessWidget {
             Dimensions.height20.heightBox,
             //top four container
             FutureBuilder(
-              future: FireStoreServices.getCount(currentUser!.uid),
+              future: FireStoreServices.getCount(FirebaseAuth.instance.currentUser!.uid),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {
                   return progressIndicator(nicePurple);
@@ -303,7 +304,7 @@ class HomePage extends StatelessWidget {
             //popular veggies
             Dimensions.height20.heightBox,
             StreamBuilder(
-              stream: FireStoreServices.getPopularVeg(currentUser!.uid),
+              stream: FireStoreServices.getPopularVeg(FirebaseAuth.instance.currentUser!.uid),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
@@ -376,7 +377,7 @@ class HomePage extends StatelessWidget {
             //popular fruits
             Dimensions.height20.heightBox,
             StreamBuilder(
-              stream: FireStoreServices.getPopularFruit(currentUser!.uid),
+              stream: FireStoreServices.getPopularFruit(FirebaseAuth.instance.currentUser!.uid),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
