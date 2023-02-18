@@ -1,4 +1,5 @@
 import 'package:fresh_om_seller/const/const.dart';
+import 'package:fresh_om_seller/controllers/products_controller.dart';
 import 'package:fresh_om_seller/views/products_screen/add_products/add_fruits.dart';
 import 'package:fresh_om_seller/views/products_screen/add_products/add_vegetables.dart';
 
@@ -7,6 +8,7 @@ class AddProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductsController());
     return Scaffold(
       backgroundColor: mainBackGround,
       appBar: AppBar(

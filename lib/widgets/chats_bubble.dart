@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:intl/intl.dart' as intl;
 
+import '../utils/reusable_big_text.dart';
+
 Widget chatBubble(DocumentSnapshot data) {
   var t =
       data['created_on'] == null ? DateTime.now() : data['created_on'].toDate();
@@ -15,7 +17,7 @@ Widget chatBubble(DocumentSnapshot data) {
       padding: EdgeInsets.all(Dimensions.height12),
       margin: EdgeInsets.only(bottom: Dimensions.width8),
       decoration: BoxDecoration(
-        color: Colors.teal,
+        color: nicePurple,
         borderRadius: data['uid'] == FirebaseAuth.instance.currentUser!.uid
             ? BorderRadius.only(
                 topRight: Radius.circular(Dimensions.radius20),
@@ -29,12 +31,12 @@ Widget chatBubble(DocumentSnapshot data) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          "${data['msg']}"
-              .text
-              .size(Dimensions.fontSize16)
-              .color(white)
-              .semiBold
-              .make(),
+          BigText(
+            text: "${data['msg']}",
+            fontWeight: FontWeight.w600,
+            size: Dimensions.fontSize16,
+            color: white,
+          ),
           SizedBox(
             height: Dimensions.height10,
           ),

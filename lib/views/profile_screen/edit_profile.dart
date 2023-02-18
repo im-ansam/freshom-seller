@@ -5,6 +5,8 @@ import 'package:fresh_om_seller/utils/reusable_circular_indicator.dart';
 import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/widgets/custom_text_field.dart';
 
+import '../../utils/reusable_big_text.dart';
+
 class EditProfile extends StatefulWidget {
   final String? username;
   const EditProfile({Key? key, this.username}) : super(key: key);
@@ -29,7 +31,7 @@ class _EditProfileState extends State<EditProfile> {
           backgroundColor: nicePurple,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            leading: Icon(
+            leading: const Icon(
               Icons.arrow_back,
               color: white,
             ).onTap(() {
@@ -39,11 +41,12 @@ class _EditProfileState extends State<EditProfile> {
             }),
             backgroundColor: nicePurple,
             elevation: 0,
-            title: editProfile.text
-                .size(Dimensions.fontSize18)
-                .color(white)
-                .semiBold
-                .make(),
+            title: BigText(
+              text: editProfile,
+              fontWeight: FontWeight.w700,
+              size: Dimensions.fontSize18,
+              color: white,
+            ),
             actions: [
               TextButton(
                   onPressed: () async {
@@ -152,11 +155,14 @@ class _EditProfileState extends State<EditProfile> {
                       isDesc: false),
                   Dimensions.height30.heightBox,
                   Align(
-                      alignment: Alignment.centerLeft,
-                      child: headingText(
-                          text: "Change your password",
-                          fontSize: Dimensions.fontSize18,
-                          color: white)),
+                    alignment: Alignment.centerLeft,
+                    child: BigText(
+                      text: "Change your password",
+                      fontWeight: FontWeight.w700,
+                      size: Dimensions.fontSize18,
+                      color: white,
+                    ),
+                  ),
                   Dimensions.height20.heightBox,
                   customTextField(
                       controller: controller.newPassController,

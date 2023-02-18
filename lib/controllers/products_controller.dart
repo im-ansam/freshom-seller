@@ -7,9 +7,10 @@ import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/home_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
+import 'package:intl/intl.dart' as intl;
 
 class ProductsController extends GetxController {
-  var time = DateTime.now();
+  var time = intl.DateFormat('dd-MM-yyyy').format(DateTime.now()).toString();
   var productImage = "".obs;
   var productImgLink = "";
   var isLoading = false.obs;
@@ -53,7 +54,6 @@ class ProductsController extends GetxController {
     store.set({
       'f_desc': fDescController.text,
       'f_image': imageUrl,
-      'f_isPopular': false,
       'f_name': fNameController.text,
       'f_price': fPriceController.text,
       'f_qty': fQtyController.text,
@@ -72,7 +72,6 @@ class ProductsController extends GetxController {
     store.set({
       'v_desc': vDescController.text,
       'v_image': imageUrl,
-      'v_isPopular': false,
       'v_name': vNameController.text,
       'v_price': vPriceController.text,
       'v_qty': vQtyController.text,

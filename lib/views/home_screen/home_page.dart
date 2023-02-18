@@ -8,6 +8,7 @@ import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/message_screens/messages_list.dart';
 import 'package:fresh_om_seller/views/products_screen/details/fruit_detail_page.dart';
 import 'package:fresh_om_seller/views/products_screen/details/veg_detail_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/reusable_big_text.dart';
 import 'package:intl/intl.dart' as intl;
@@ -30,33 +31,42 @@ class HomePage extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            "Hi, ${homeController.username}"
-                .text
-                .size(Dimensions.fontSize23)
-                .letterSpacing(1)
-                .color(nicePurple)
-                .bold
-                .make(),
-            Text(
-              intl.DateFormat('EEE , MMM d,' 'yy').format(DateTime.now()),
-              style: TextStyle(
-                  fontSize: Dimensions.fontSize16,
-                  color: Vx.gray500,
-                  fontWeight: FontWeight.bold),
-            )
+            BigText(
+              text: "Hi,  ${homeController.username}",
+              fontWeight: FontWeight.w600,
+              color: nicePurple,
+              size: Dimensions.fontSize23,
+            ),
+            Text(intl.DateFormat('EEE , MMM d,' 'yy').format(DateTime.now()),
+                style: GoogleFonts.poppins(
+                    fontSize: Dimensions.fontSize16,
+                    color: Vx.gray500,
+                    fontWeight: FontWeight.bold))
           ],
         ),
         actions: [
-          Container(
-            height: Dimensions.height60,
-            width: Dimensions.height60,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(homeController.userImage),
-                    fit: BoxFit.cover),
-                shape: BoxShape.circle,
-                color: Colors.grey),
-          ).paddingOnly(right: Dimensions.width15)
+          FutureBuilder(
+            future: FireStoreServices.getProfile(
+                FirebaseAuth.instance.currentUser!.uid),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (!snapshot.hasData) {
+                return progressIndicator(nicePurple);
+              } else {
+                var prof = snapshot.data!.docs[0];
+                return Container(
+                  height: Dimensions.height60,
+                  width: Dimensions.height60,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(prof['imageUrl']),
+                          fit: BoxFit.cover),
+                      shape: BoxShape.circle,
+                      color: Colors.grey),
+                ).paddingOnly(right: Dimensions.width15);
+              }
+            },
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -67,216 +77,208 @@ class HomePage extends StatelessWidget {
             Dimensions.height20.heightBox,
             //top four container
             FutureBuilder(
-              future: FireStoreServices.getCount(FirebaseAuth.instance.currentUser!.uid),
+              future: FireStoreServices.getCount(
+                  FirebaseAuth.instance.currentUser!.uid),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {
                   return progressIndicator(nicePurple);
                 } else {
                   var countData = snapshot.data;
-                  return Container(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            //total products container
-                            Container(
-                              padding:
-                                  EdgeInsets.only(top: Dimensions.height15),
-                              height: Dimensions.height100,
-                              width: Dimensions.width170,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius10),
-                                  color: nicePurple),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      "Vegetables"
-                                          .text
-                                          .color(Colors.white)
-                                          .size(Dimensions.fontSize18)
-                                          .bold
-                                          .make(),
-                                      BigText(
-                                        text: "${countData[0]}",
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        size: Dimensions.fontSize24,
-                                      ),
-                                      5.heightBox
-                                    ],
-                                  ),
-                                  Image.asset(
-                                    'images/productsIcon.png',
-                                    color: Colors.white,
-                                    height: Dimensions.height50,
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            //orders container
-                            GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                height: Dimensions.height100,
-                                width: Dimensions.width170,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.radius15),
-                                    // gradient: LinearGradient(
-                                    //     // tileMode: TileMode.repeated,
-                                    //     colors: [nicePurple, niceBlue])
-
-                                    //try this also
-                                    color: nicePurple),
-                                child: Row(
+                  return Column(
+                    children: [
+                      //top two container main row
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          //vegetables count container
+                          Container(
+                            padding: EdgeInsets.only(top: Dimensions.height15),
+                            height: Dimensions.height100,
+                            width: Dimensions.width170,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius10),
+                                color: nicePurple),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        "Orders"
-                                            .text
-                                            .color(Colors.white)
-                                            .size(Dimensions.fontSize18)
-                                            .bold
-                                            .make(),
-                                        BigText(
-                                          text: '${countData[2]}',
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          size: Dimensions.fontSize24,
-                                        ),
-                                      ],
-                                    ),
-                                    Image.asset(
-                                      'images/orderLogo.png',
-                                      color: Colors.white,
-                                      height: Dimensions.height50,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        10.heightBox,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            //total products container
-                            Container(
-                              padding:
-                                  EdgeInsets.only(top: Dimensions.height15),
-                              height: Dimensions.height100,
-                              width: Dimensions.width170,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius10),
-                                  color: nicePurple),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      "Fruits"
-                                          .text
-                                          .color(Colors.white)
-                                          .size(Dimensions.fontSize18)
-                                          .bold
-                                          .make(),
-                                      BigText(
-                                        text: '${countData[1]}',
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        size: Dimensions.fontSize24,
-                                      ),
-                                      Dimensions.width5.heightBox
-                                    ],
-                                  ),
-                                  Image.asset(
-                                    'images/productsIcon.png',
-                                    color: Colors.white,
-                                    height: Dimensions.height50,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(() => const MessagesList());
-                              },
-                              child: Container(
-                                height: Dimensions.height100,
-                                width: Dimensions.width170,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.radius15),
-                                    // gradient: LinearGradient(
-                                    //     // tileMode: TileMode.repeated,
-                                    //     colors: [nicePurple, niceBlue])
-
-                                    //try this also
-                                    color: nicePurple),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        "Messages"
-                                            .text
-                                            .color(Colors.white)
-                                            .size(Dimensions.fontSize18)
-                                            .bold
-                                            .make(),
-                                        BigText(
-                                          text: '${countData[3]}',
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          size: Dimensions.fontSize24,
-                                        ),
-                                      ],
-                                    ),
-                                    Icon(
-                                      Icons.message_rounded,
-                                      size: Dimensions.icon50,
+                                    BigText(
+                                      text: "Vegetables",
+                                      fontWeight: FontWeight.bold,
+                                      size: Dimensions.fontSize18,
                                       color: white,
                                     ),
+                                    BigText(
+                                      text: "${countData[0]}",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      size: Dimensions.fontSize24,
+                                    ).paddingOnly(left: Dimensions.height15),
+                                    5.heightBox
                                   ],
                                 ),
+                                Image.asset(
+                                  'images/productsIcon.png',
+                                  color: Colors.white,
+                                  height: Dimensions.height50,
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          //orders count container
+                          Container(
+                            height: Dimensions.height100,
+                            width: Dimensions.width170,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius15),
+                                // gradient: LinearGradient(
+                                //     // tileMode: TileMode.repeated,
+                                //     colors: [nicePurple, niceBlue])
+
+                                //try this also
+                                color: nicePurple),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    BigText(
+                                      text: "Orders",
+                                      fontWeight: FontWeight.bold,
+                                      size: Dimensions.fontSize18,
+                                      color: white,
+                                    ),
+                                    BigText(
+                                      text: '${countData[2]}',
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      size: Dimensions.fontSize24,
+                                    ),
+                                  ],
+                                ),
+                                Image.asset(
+                                  'images/orderLogo.png',
+                                  color: Colors.white,
+                                  height: Dimensions.height50,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      10.heightBox,
+                      //below two container main row
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          //fruits count container
+                          Container(
+                            padding: EdgeInsets.only(top: Dimensions.height15),
+                            height: Dimensions.height100,
+                            width: Dimensions.width170,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius10),
+                                color: nicePurple),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    BigText(
+                                      text: "Fruits",
+                                      fontWeight: FontWeight.bold,
+                                      size: Dimensions.fontSize18,
+                                      color: white,
+                                    ),
+                                    BigText(
+                                      text: '${countData[1]}',
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      size: Dimensions.fontSize24,
+                                    ),
+                                    Dimensions.width5.heightBox
+                                  ],
+                                ),
+                                Image.asset(
+                                  'images/productsIcon.png',
+                                  color: Colors.white,
+                                  height: Dimensions.height50,
+                                ),
+                              ],
+                            ),
+                          ),
+                          //messages container
+
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => const MessagesList());
+                            },
+                            child: Container(
+                              height: Dimensions.height100,
+                              width: Dimensions.width170,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius15),
+                                  // gradient: LinearGradient(
+                                  //     // tileMode: TileMode.repeated,
+                                  //     colors: [nicePurple, niceBlue])
+
+                                  //try this also
+                                  color: nicePurple),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      BigText(
+                                        text: "Messages",
+                                        fontWeight: FontWeight.bold,
+                                        size: Dimensions.fontSize18,
+                                        color: white,
+                                      ),
+                                      BigText(
+                                        text: '${countData[3]}',
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        size: Dimensions.fontSize24,
+                                      ),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.message_rounded,
+                                    size: Dimensions.icon50,
+                                    color: white,
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   );
                 }
               },
@@ -293,25 +295,26 @@ class HomePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.radius10),
                   color: Colors.grey.shade200,
                 ),
-                child: "Popular Veggies"
-                    .text
-                    .color(Colors.grey[800])
-                    .size(Dimensions.fontSize18)
-                    .semiBold
-                    .make(),
+                child: BigText(
+                  text: "Today added Veggies",
+                  fontWeight: FontWeight.w600,
+                  size: Dimensions.fontSize16,
+                  color: Colors.grey[800],
+                ),
               ),
             ),
             //popular veggies
             Dimensions.height20.heightBox,
             StreamBuilder(
-              stream: FireStoreServices.getPopularVeg(FirebaseAuth.instance.currentUser!.uid),
+              stream: FireStoreServices.getNewestVeg(
+                  FirebaseAuth.instance.currentUser!.uid),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
                   return progressIndicator(nicePurple);
                 } else if (snapshot.data!.docs.isEmpty) {
                   return Center(
-                    child: headingText(text: "No popular products"),
+                    child: headingText(text: "No products added today"),
                   );
                 } else {
                   var veggies = snapshot.data!.docs;
@@ -339,11 +342,12 @@ class HomePage extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              title: "${veggies[index]['v_name']}"
-                                  .text
-                                  .semiBold
-                                  .color(Colors.grey[800])
-                                  .make(),
+                              title: BigText(
+                                text: "${veggies[index]['v_name']}",
+                                fontWeight: FontWeight.w700,
+                                size: Dimensions.fontSize16,
+                                color: Colors.grey[800],
+                              ),
                               subtitle: "Rs.${veggies[index]['v_price']}"
                                   .text
                                   .semiBold
@@ -366,25 +370,26 @@ class HomePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.radius10),
                   color: Colors.grey.shade200,
                 ),
-                child: "Popular Fruits"
-                    .text
-                    .color(Colors.grey[800])
-                    .size(Dimensions.fontSize18)
-                    .semiBold
-                    .make(),
+                child: BigText(
+                  text: "Today added Fruits",
+                  fontWeight: FontWeight.w600,
+                  size: Dimensions.fontSize16,
+                  color: Colors.grey[800],
+                ),
               ),
             ),
             //popular fruits
             Dimensions.height20.heightBox,
             StreamBuilder(
-              stream: FireStoreServices.getPopularFruit(FirebaseAuth.instance.currentUser!.uid),
+              stream: FireStoreServices.getNewestFruit(
+                  FirebaseAuth.instance.currentUser!.uid),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
                   return progressIndicator(nicePurple);
                 } else if (snapshot.data!.docs.isEmpty) {
                   return Center(
-                    child: headingText(text: "No popular products"),
+                    child: headingText(text: "No products added today"),
                   );
                 } else {
                   var fruits = snapshot.data!.docs;
@@ -411,11 +416,12 @@ class HomePage extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              title: "${fruits[index]['f_name']}"
-                                  .text
-                                  .semiBold
-                                  .color(Colors.grey[800])
-                                  .make(),
+                              title: BigText(
+                                text: "${fruits[index]['f_name']}",
+                                fontWeight: FontWeight.w700,
+                                size: Dimensions.fontSize16,
+                                color: Colors.grey[800],
+                              ),
                               subtitle: "Rs.40"
                                   .text
                                   .semiBold

@@ -6,13 +6,11 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     getUserName();
-    getUserImage();
   }
 
   var navIndex = 0.obs;
 
   var username = '';
-  var userImage = '';
 
   getUserName() async {
     var n = await fireStore
@@ -25,18 +23,5 @@ class HomeController extends GetxController {
       }
     });
     username = n;
-  }
-
-  getUserImage() async {
-    var img = await fireStore
-        .collection(sellerCollection)
-        .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      if (value.docs.isNotEmpty) {
-        return value.docs.single['imageUrl'];
-      }
-    });
-    userImage = img;
   }
 }

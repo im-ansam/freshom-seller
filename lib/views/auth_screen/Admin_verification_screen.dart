@@ -5,6 +5,9 @@ import 'package:fresh_om_seller/services/firestore_services.dart';
 import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/home_screen/main_home.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../utils/reusable_big_text.dart';
 
 class VerificationScreen extends StatelessWidget {
   const VerificationScreen({Key? key}) : super(key: key);
@@ -31,16 +34,17 @@ class VerificationScreen extends StatelessWidget {
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Lottie.network(
-                          "https://assets1.lottiefiles.com/private_files/lf30_oz2evqgk.json"),
+                      Container(
+                        child: Lottie.asset(verifiedGif),
+                      ),
                       Dimensions.height10.heightBox,
-                      "Huray.. your account is verified you can enter now."
-                          .text
-                          .size(Dimensions.fontSize20)
-                          .bold
-                          .color(niceDarkViolet)
-                          .make()
-                          .paddingOnly(left: Dimensions.width20),
+                      BigText(
+                        text:
+                            "Huray.. your account is verified you can enter now.",
+                        fontWeight: FontWeight.bold,
+                        size: Dimensions.fontSize20,
+                        color: niceDarkViolet,
+                      ).paddingOnly(left: Dimensions.width20),
                       Dimensions.height30.heightBox,
                       headingText(
                               text: "Proceed",
@@ -54,7 +58,9 @@ class VerificationScreen extends StatelessWidget {
                           .color(mainGreen)
                           .shadowSm
                           .make()
-                          .onTap(() {
+                          .onTap(() async {
+                        var sharedPref = await SharedPreferences.getInstance();
+                        sharedPref.setBool('isVerified', true);
                         Get.offAll(() => const MainHome());
                       })
                     ],
@@ -63,8 +69,8 @@ class VerificationScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Lottie.network(
-                          "https://assets5.lottiefiles.com/packages/lf20_przr7mrj.json"),
+                      Lottie.asset(verifyPendingGif),
+                      Dimensions.height20.heightBox,
                       "Your phiysical verification is in progress.."
                           .text
                           .size(Dimensions.fontSize20)

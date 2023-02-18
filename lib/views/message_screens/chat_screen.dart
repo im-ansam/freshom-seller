@@ -6,6 +6,8 @@ import 'package:fresh_om_seller/services/firestore_services.dart';
 import 'package:fresh_om_seller/utils/reusable_circular_indicator.dart';
 import 'package:fresh_om_seller/widgets/chats_bubble.dart';
 
+import '../../utils/reusable_big_text.dart';
+
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
@@ -17,7 +19,12 @@ class ChatScreen extends StatelessWidget {
         backgroundColor: mainBackGround,
         foregroundColor: nicePurple,
         elevation: 0,
-        title: "${controller.friendName}".text.size(18).semiBold.make(),
+        title: BigText(
+          text: "${controller.friendName}",
+          fontWeight: FontWeight.w700,
+          size: Dimensions.fontSize18,
+          color: nicePurple,
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(Dimensions.height10),
@@ -49,7 +56,9 @@ class ChatScreen extends StatelessWidget {
                                   .mapIndexed((currentValue, index) {
                                 var data = snapshot.data!.docs[index];
                                 return Align(
-                                    alignment: data['uid'] == FirebaseAuth.instance.currentUser!.uid
+                                    alignment: data['uid'] ==
+                                            FirebaseAuth
+                                                .instance.currentUser!.uid
                                         ? Alignment.centerRight
                                         : Alignment.centerLeft,
                                     child: chatBubble(data));

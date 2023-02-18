@@ -8,6 +8,8 @@ import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/order_screen/order_details.dart';
 import 'package:intl/intl.dart' as intl;
 
+import '../../utils/reusable_big_text.dart';
+
 class OrdersList extends StatelessWidget {
   const OrdersList({Key? key}) : super(key: key);
 
@@ -20,11 +22,12 @@ class OrdersList extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: mainBackGround,
         elevation: 0,
-        title: orders.text
-            .size(Dimensions.fontSize18)
-            .color(nicePurple)
-            .semiBold
-            .make(),
+        title: BigText(
+          text: orders,
+          fontWeight: FontWeight.w700,
+          size: Dimensions.fontSize18,
+          color: nicePurple,
+        ),
         actions: [
           Center(
             child: Text(

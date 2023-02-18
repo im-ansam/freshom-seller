@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
-import 'package:fresh_om_seller/controllers/auth_controller.dart';
 import 'package:fresh_om_seller/controllers/profile_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
 import 'package:fresh_om_seller/utils/reusable_circular_indicator.dart';
 import 'package:fresh_om_seller/views/auth_screen/login_screen.dart';
 import 'package:fresh_om_seller/views/profile_screen/edit_profile.dart';
-import 'package:fresh_om_seller/views/Notifications/notifications.dart';
 import 'package:fresh_om_seller/views/message_screens/messages_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../utils/reusable_big_text.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -16,17 +17,17 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var profileController = Get.put(ProfileController());
-    var controller = Get.put(AuthController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: nicePurple,
         elevation: 0,
-        title: profile.text
-            .size(Dimensions.fontSize18)
-            .color(white)
-            .semiBold
-            .make(),
+        title: BigText(
+          text: profile,
+          fontWeight: FontWeight.w700,
+          size: Dimensions.fontSize18,
+          color: white,
+        ),
         actions: [
           IconButton(
               onPressed: () {
@@ -34,14 +35,15 @@ class ProfileScreen extends StatelessWidget {
                       username: profileController.snapshotData['name'],
                     ));
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.edit,
                 color: white,
               )),
           TextButton(
               onPressed: () async {
+                var sharedPref = await SharedPreferences.getInstance();
+                sharedPref.setBool('isLogged', false);
                 await auth.signOut();
-                controller.dispose();
 
                 Get.offAll(() => const MainLoginPage());
               },
@@ -54,7 +56,8 @@ class ProfileScreen extends StatelessWidget {
         children: [
           //top profile details row
           FutureBuilder(
-            future: FireStoreServices.getProfile(FirebaseAuth.instance.currentUser!.uid),
+            future: FireStoreServices.getProfile(
+                FirebaseAuth.instance.currentUser!.uid),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
@@ -81,18 +84,20 @@ class ProfileScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        "${profileController.snapshotData['name']}"
-                            .text
-                            .size(Dimensions.fontSize18)
-                            .color(white)
-                            .semiBold
-                            .make(),
+                        BigText(
+                          text: "${profileController.snapshotData['name']}",
+                          color: white,
+                          fontWeight: FontWeight.w600,
+                          size: Dimensions.fontSize18,
+                        ),
                         Dimensions.width5.heightBox,
-                        "${profileController.snapshotData['email']}"
-                            .text
-                            .size(Dimensions.fontSize14)
-                            .color(white)
-                            .make()
+                        BigText(
+                          text: "${profileController.snapshotData['email']}",
+                          color: white,
+                          letterSpace: 1,
+                          fontWeight: FontWeight.w500,
+                          size: Dimensions.fontSize14,
+                        ),
                       ],
                     )
                   ],
@@ -107,24 +112,27 @@ class ProfileScreen extends StatelessWidget {
           Padding(
               padding: EdgeInsets.only(
                   left: Dimensions.width20, top: Dimensions.height20),
-              child: Column(
-                children: List.generate(profileItemTitles.length, (index) {
-                  return ListTile(
-                      onTap: () {
-                        switch (index) {
-                          case 0:
-                            Get.to(() => NotificationsScreen());
-                            break;
-                          case 1:
-                            Get.to(() => MessagesList());
-                        }
-                      },
-                      leading: Icon(
-                        profileItemIcons[index],
-                        color: white,
-                      ),
-                      title: profileItemTitles[index].text.color(white).make());
-                }),
+              child: ListView(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  ListTile(
+                    onTap: () {
+                      Get.to(() => const MessagesList());
+                    },
+                    leading: Icon(
+                      Icons.message_rounded,
+                      color: white,
+                      size: Dimensions.icon30,
+                    ),
+                    title: BigText(
+                      text: messages,
+                      color: white,
+                      fontWeight: FontWeight.w500,
+                      size: Dimensions.fontSize18,
+                    ),
+                  )
+                ],
               ))
         ],
       ),

@@ -2,8 +2,10 @@ import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/auth_controller.dart';
 import 'package:fresh_om_seller/views/auth_screen/Admin_verification_screen.dart';
 import 'package:fresh_om_seller/views/auth_screen/forgot_password.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../utils/reusable_big_text.dart';
 import '../home_screen/main_home.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 bool isLoading = false;
 
@@ -34,14 +36,14 @@ class _MainLoginPageState extends State<MainLoginPage> {
             isSignUpScreen ? Dimensions.height167 : Dimensions.height100 * 2,
         child: Column(
           children: [
-            Image.asset("images/logoMain2.png"),
+            Image.asset("images/logoMain2.png", height: Dimensions.height90),
             Dimensions.height10.heightBox,
-            "Fresh'Om"
-                .text
-                .bold
-                .color(nicePurple)
-                .size(Dimensions.fontSize25)
-                .make(),
+            BigText(
+              text: "Fresh'Om",
+              fontWeight: FontWeight.w700,
+              size: Dimensions.fontSize25,
+              color: nicePurple,
+            ),
             "Seller"
                 .text
                 .semiBold
@@ -73,7 +75,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                         RichText(
                           text: TextSpan(
                               text: isSignUpScreen ? "Welcome to" : "Welcome",
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   fontSize: Dimensions.fontSize25,
                                   color: Colors.yellow[200],
                                   letterSpacing: 2),
@@ -82,7 +84,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                     text: isSignUpScreen
                                         ? " Fresh'Om,"
                                         : " Back,",
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: Dimensions.fontSize30,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.yellow[200],
@@ -124,8 +126,8 @@ class _MainLoginPageState extends State<MainLoginPage> {
                 padding: EdgeInsets.all(Dimensions.height25),
                 height: isSignUpScreen
                     ? Dimensions.height402
-                    : Dimensions.height270,
-                width: Dimensions.screenWidth - 40,
+                    : Dimensions.height300 - Dimensions.height10,
+                width: Dimensions.screenWidth - Dimensions.height40,
                 margin: EdgeInsets.symmetric(horizontal: Dimensions.width20),
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -150,14 +152,14 @@ class _MainLoginPageState extends State<MainLoginPage> {
                             },
                             child: Column(
                               children: [
-                                "LOGIN"
-                                    .text
-                                    .size(Dimensions.fontSize18)
-                                    .extraBold
-                                    .color(isSignUpScreen
-                                        ? inactiveTextColor
-                                        : nicePurple)
-                                    .make(),
+                                BigText(
+                                  text: "LOGIN",
+                                  fontWeight: FontWeight.bold,
+                                  size: Dimensions.fontSize18,
+                                  color: isSignUpScreen
+                                      ? inactiveTextColor
+                                      : nicePurple,
+                                ),
                                 if (!isSignUpScreen)
                                   Container(
                                     margin: const EdgeInsets.only(top: 3),
@@ -176,14 +178,14 @@ class _MainLoginPageState extends State<MainLoginPage> {
                             },
                             child: Column(
                               children: [
-                                "SIGNUP"
-                                    .text
-                                    .size(Dimensions.fontSize18)
-                                    .extraBold
-                                    .color(isSignUpScreen
-                                        ? nicePurple
-                                        : inactiveTextColor)
-                                    .make(),
+                                BigText(
+                                  text: "SIGNUP",
+                                  fontWeight: FontWeight.bold,
+                                  size: Dimensions.fontSize18,
+                                  color: isSignUpScreen
+                                      ? nicePurple
+                                      : inactiveTextColor,
+                                ),
                                 if (isSignUpScreen)
                                   Container(
                                     margin: const EdgeInsets.only(top: 3),
@@ -215,23 +217,22 @@ class _MainLoginPageState extends State<MainLoginPage> {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           buildTextField(Icons.email_outlined, "Email", false, true,
               controller.emailController),
           buildTextField(Icons.lock, "Password", true, false,
               controller.passwordController),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-                onPressed: () {
-                  Get.to(() => const ResetPassword());
-                },
-                child: "Forgot Password?"
-                    .text
-                    .semiBold
-                    .size(Dimensions.fontSize16)
-                    .color(nicePurple)
-                    .make()),
+          TextButton(
+            onPressed: () {
+              Get.to(() => const ResetPassword());
+            },
+            child: BigText(
+              text: "Forgot Password?",
+              fontWeight: FontWeight.w600,
+              size: Dimensions.fontSize16,
+              color: nicePurple,
+            ),
           )
         ],
       ),
@@ -294,7 +295,9 @@ class _MainLoginPageState extends State<MainLoginPage> {
     return AnimatedPositioned(
         duration: const Duration(milliseconds: 300),
         // curve: Curves.bounceInOut,
-        top: isSignUpScreen ? Dimensions.height525 : Dimensions.height440,
+        top: isSignUpScreen
+            ? Dimensions.height525
+            : Dimensions.height450 + Dimensions.height10,
         child: Container(
           alignment: Alignment.center,
           height: Dimensions.height90,
@@ -331,7 +334,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                       offset: const Offset(0, 1))
                 ]),
             child: isLoading == true
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                     ),
@@ -362,7 +365,10 @@ class _MainLoginPageState extends State<MainLoginPage> {
                         name: nameController.text,
                         password: signUpPasswordController.text,
                         address: addressController.text);
-                  }).then((value) {
+                  }).then((value) async {
+                    var sharedPref = await SharedPreferences.getInstance();
+                    sharedPref.setBool('isLogged', true);
+                    sharedPref.setBool('isVerified', false);
                     Get.offAll(() => const VerificationScreen());
                   });
                   setState(() {
@@ -382,19 +388,26 @@ class _MainLoginPageState extends State<MainLoginPage> {
               setState(() {
                 isLoading = true;
               });
-              await controller.signInMethod().then((value) => {
-                    if (value != null)
-                      {
-                        VxToast.show(context, msg: loggedIn),
-                        Get.offAll(() => const MainHome())
-                      }
-                    else
-                      {
-                        setState(() {
-                          isLoading = false;
-                        })
-                      }
+              await controller.signInMethod().then((value) async {
+                setState(() {
+                  isLoading = false;
+                });
+                if (value != null) {
+                  // await controller.checkIsVerified();
+                  VxToast.show(context, msg: loggedIn);
+
+                  setState(() {
+                    isLoading = false;
                   });
+                  var sharedPref = await SharedPreferences.getInstance();
+                  sharedPref.setBool('isLogged', true);
+                  Get.offAll(() => const MainHome());
+                } else {
+                  setState(() {
+                    isLoading = false;
+                  });
+                }
+              });
               setState(() {
                 isLoading = false;
               });

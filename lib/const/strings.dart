@@ -34,4 +34,7 @@ const appName = "FreshOm Seller",
     orderConfirmed = "Confirmed",
     orderOnDelivery = "On Delivery",
     orderDelivered = "Delivered",
+    loadingImage = "imgLoading.gif",
+    verifyPendingGif = "animations/pendingVerification.json",
+    verifiedGif = "animations/verified.json",
     notifications = "Notifications";

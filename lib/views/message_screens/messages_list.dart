@@ -8,6 +8,8 @@ import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/message_screens/chat_screen.dart';
 import 'package:intl/intl.dart' as intl;
 
+import '../../utils/reusable_big_text.dart';
+
 class MessagesList extends StatelessWidget {
   const MessagesList({Key? key}) : super(key: key);
 
@@ -18,11 +20,12 @@ class MessagesList extends StatelessWidget {
         foregroundColor: nicePurple,
         backgroundColor: mainBackGround,
         elevation: 0,
-        title: messages.text
-            .size(Dimensions.fontSize18)
-            .color(nicePurple)
-            .semiBold
-            .make(),
+        title: BigText(
+          text: messages,
+          fontWeight: FontWeight.w700,
+          size: Dimensions.fontSize18,
+          color: nicePurple,
+        ),
       ),
       backgroundColor: mainBackGround,
       body: StreamBuilder(
@@ -65,12 +68,12 @@ class MessagesList extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    title: "${data[index]['sender_name']}"
-                        .text
-                        .bold
-                        .color(nicePurple)
-                        .size(16)
-                        .make(),
+                    title: BigText(
+                      text: "${data[index]['sender_name']}",
+                      color: nicePurple,
+                      fontWeight: FontWeight.w700,
+                      size: Dimensions.fontSize16,
+                    ),
                     subtitle: "${data[index]['last_msg']}"
                         .text
                         .semiBold

@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
+import 'package:fresh_om_seller/views/auth_screen/Admin_verification_screen.dart';
+import 'package:fresh_om_seller/views/home_screen/main_home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   var loading = false.obs;
@@ -53,8 +56,9 @@ class AuthController extends GetxController {
 
   // storing user data
   storeUserData({name, password, email, address}) async {
-    DocumentReference store =
-        fireStore.collection(sellerCollection).doc(FirebaseAuth.instance.currentUser!.uid);
+    DocumentReference store = fireStore
+        .collection(sellerCollection)
+        .doc(FirebaseAuth.instance.currentUser!.uid);
     store.set({
       'name': name,
       'password': password,
@@ -81,4 +85,27 @@ class AuthController extends GetxController {
     await auth.currentUser!.sendEmailVerification();
     Get.snackbar('email', 'send');
   }
+
+  //checking if user verification is done
+  //
+  // checkIsVerified() async {
+  //   bool isVerified = false;
+  //   var collection = fireStore
+  //       .collection(sellerCollection)
+  //       .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid);
+  //   var querySnapshot = await collection.get();
+  //   for (var queryDocumentSnapshot in querySnapshot.docs) {
+  //     Map<String, dynamic> data = queryDocumentSnapshot.data();
+  //
+  //     if (data['verified'] == true) {
+  //       isVerified == true;
+  //       Get.offAll(() => const MainHome());
+  //       break;
+  //     } else {
+  //       var sharedPref = await SharedPreferences.getInstance();
+  //       sharedPref.setBool('isLogged', true);
+  //       Get.offAll(() => const VerificationScreen());
+  //     }
+  //   }
+  // }
 }

@@ -5,6 +5,8 @@ import 'package:fresh_om_seller/views/products_screen/fruit_category.dart';
 import 'package:fresh_om_seller/views/products_screen/veg_category.dart';
 import 'package:intl/intl.dart' as intl;
 
+import '../../utils/reusable_big_text.dart';
+
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);
 
@@ -19,7 +21,12 @@ class ProductsScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: mainBackGround,
           elevation: 0,
-          title: "Products".text.size(18).color(nicePurple).semiBold.make(),
+          title: BigText(
+            text: "Products",
+            fontWeight: FontWeight.w700,
+            size: Dimensions.fontSize18,
+            color: nicePurple,
+          ),
           actions: [
             Center(
               child: Text(

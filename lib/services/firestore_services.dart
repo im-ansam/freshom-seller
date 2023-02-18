@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/firebase_const.dart';
+import 'package:intl/intl.dart' as intl;
 
 class FireStoreServices {
   static getUser(uid) {
@@ -54,19 +55,23 @@ class FireStoreServices {
         .snapshots();
   }
 
-  static getPopularVeg(uid) {
+  static getNewestVeg(uid) {
     return fireStore
         .collection(vegetableCollection)
         .where('seller_id', isEqualTo: uid)
-        .where('v_isPopular', isEqualTo: true)
+        .where('v_uploaded_date',
+            isEqualTo:
+                intl.DateFormat('dd-MM-yyyy').format(DateTime.now()).toString())
         .snapshots();
   }
 
-  static getPopularFruit(uid) {
+  static getNewestFruit(uid) {
     return fireStore
         .collection(fruitsCollection)
         .where('seller_id', isEqualTo: uid)
-        .where('f_isPopular', isEqualTo: true)
+        .where('f_uploaded_date',
+            isEqualTo:
+                intl.DateFormat('dd-MM-yyyy').format(DateTime.now()).toString())
         .snapshots();
   }
 

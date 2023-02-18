@@ -1,5 +1,8 @@
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/auth_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../utils/reusable_big_text.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key? key}) : super(key: key);
@@ -33,24 +36,27 @@ class _ResetPasswordState extends State<ResetPassword> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      "Fresh'Om"
-                          .text
-                          .extraBold
-                          .color(Colors.white)
-                          .size(Dimensions.fontSize50)
-                          .makeCentered(),
+                      Align(
+                        alignment: Alignment.center,
+                        child: BigText(
+                          text: "Fresh'Om",
+                          fontWeight: FontWeight.bold,
+                          size: Dimensions.fontSize50,
+                          color: white,
+                        ),
+                      ),
                       Dimensions.height10.heightBox,
                       RichText(
                         text: TextSpan(
                             text: "Reset your",
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                                 fontSize: Dimensions.fontSize25,
                                 color: Colors.yellow[200],
-                                letterSpacing: 2),
+                                letterSpacing: 1),
                             children: [
                               TextSpan(
                                   text: " Password,",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                     fontSize: Dimensions.fontSize30,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.yellow[200],
@@ -86,15 +92,14 @@ class _ResetPasswordState extends State<ResetPassword> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      "Email"
-                          .text
-                          .size(Dimensions.fontSize16)
-                          .semiBold
-                          .color(nicePurple)
-                          .make()
-                          .paddingOnly(
-                              left: Dimensions.width10,
-                              bottom: Dimensions.height10),
+                      BigText(
+                        text: "Email",
+                        fontWeight: FontWeight.w700,
+                        size: Dimensions.fontSize16,
+                        color: nicePurple,
+                      ).paddingOnly(
+                          left: Dimensions.width10,
+                          bottom: Dimensions.height10),
                       TextFormField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,

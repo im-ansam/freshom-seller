@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fresh_om_seller/views/auth_screen/login_screen.dart';
 import 'package:fresh_om_seller/const/const.dart';
+import 'package:fresh_om_seller/views/home_screen/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: const MainLoginPage(), //
+      home: const SplashScreen(), //
     );
   }
 }

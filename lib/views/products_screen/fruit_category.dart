@@ -17,7 +17,8 @@ class FruitCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.find<ProductsController>();
     return StreamBuilder(
-      stream: FireStoreServices.getFruits(FirebaseAuth.instance.currentUser!.uid),
+      stream:
+          FireStoreServices.getFruits(FirebaseAuth.instance.currentUser!.uid),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
           return progressIndicator(nicePurple);
@@ -57,9 +58,10 @@ class FruitCategory extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.circular(Dimensions.radius10),
                             ),
-                            child: Image.network(
-                              data[index]['f_image'],
+                            child: FadeInImage(
                               fit: BoxFit.cover,
+                              placeholder: const AssetImage(loadingImage),
+                              image: NetworkImage(data[index]['f_image']),
                             )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +72,7 @@ class FruitCategory extends StatelessWidget {
                                 BigText(
                                         overFlow: TextOverflow.ellipsis,
                                         text: "${data[index]['f_name']}",
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w700,
                                         size: Dimensions.fontSize16,
                                         color: Colors.grey[800])
                                     .box
@@ -107,16 +109,10 @@ class FruitCategory extends StatelessWidget {
                                             )
                                                 .paddingAll(Dimensions.height10)
                                                 .onTap(() {
-                                              switch (i) {
-                                                case 0:
-                                                  break;
-                                                case 1:
-                                                  controller.removeFruits(
-                                                      data[index].id);
-                                                  VxToast.show(context,
-                                                      msg: 'Product Removed');
-                                                  break;
-                                              }
+                                              controller
+                                                  .removeFruits(data[index].id);
+                                              VxToast.show(context,
+                                                  msg: 'Product Removed');
                                             }),
                                           ),
                                         )

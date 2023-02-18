@@ -4,6 +4,8 @@ import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/order_screen/Components/order_place_details.dart';
 import 'package:intl/intl.dart' as intl;
 
+import '../../utils/reusable_big_text.dart';
+
 class OrderDetails extends StatefulWidget {
   final dynamic data;
   const OrderDetails({Key? key, this.data}) : super(key: key);
@@ -52,8 +54,12 @@ class _OrderDetailsState extends State<OrderDetails> {
             foregroundColor: nicePurple,
             backgroundColor: mainBackGround,
             elevation: 0,
-            title:
-                orderDetails.text.size(Dimensions.fontSize18).semiBold.make(),
+            title: BigText(
+              text: orderDetails,
+              fontWeight: FontWeight.w700,
+              size: Dimensions.fontSize18,
+              color: nicePurple,
+            ),
           ),
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -65,17 +71,23 @@ class _OrderDetailsState extends State<OrderDetails> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      headingText(
-                              text: "Order Status:",
-                              fontSize: Dimensions.fontSize18)
-                          .paddingOnly(
-                              left: Dimensions.width10,
-                              top: Dimensions.height10),
+                      BigText(
+                        text: "Order Status:",
+                        fontWeight: FontWeight.w700,
+                        size: Dimensions.fontSize18,
+                        color: nicePurple,
+                      ).paddingOnly(
+                          left: Dimensions.width10, top: Dimensions.height10),
                       SwitchListTile(
                         activeColor: mainGreen,
                         value: true,
                         onChanged: (value) {},
-                        title: normalText(text: orderPlaced, color: nicePurple),
+                        title: const BigText(
+                          text: orderPlaced,
+                          color: nicePurple,
+                          fontWeight: FontWeight.w600,
+                          size: 14,
+                        ),
                       ),
                       SwitchListTile(
                         activeColor: mainGreen,
@@ -83,8 +95,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                         onChanged: (value) {
                           controller.confirmed.value = value;
                         },
-                        title:
-                            normalText(text: orderConfirmed, color: nicePurple),
+                        title: const BigText(
+                          text: orderConfirmed,
+                          color: nicePurple,
+                          fontWeight: FontWeight.w600,
+                          size: 14,
+                        ),
                       ),
                       SwitchListTile(
                         activeColor: mainGreen,
@@ -96,8 +112,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                               status: value,
                               docId: widget.data.id);
                         },
-                        title: normalText(
-                            text: orderOnDelivery, color: nicePurple),
+                        title: const BigText(
+                          text: orderOnDelivery,
+                          color: nicePurple,
+                          fontWeight: FontWeight.w600,
+                          size: 14,
+                        ),
                       ),
                       SwitchListTile(
                         activeColor: mainGreen,
@@ -109,8 +129,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                               status: value,
                               docId: widget.data.id);
                         },
-                        title:
-                            normalText(text: orderDelivered, color: nicePurple),
+                        title: const BigText(
+                          text: orderDelivered,
+                          color: nicePurple,
+                          fontWeight: FontWeight.w600,
+                          size: 14,
+                        ),
                       )
                     ],
                   )
@@ -118,8 +142,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                       .outerShadowMd
                       .color(mainBackGround)
                       .roundedSM
+                      .margin(EdgeInsets.only(top: Dimensions.height10))
                       .width(Dimensions.height370)
-                      .width(Dimensions.height360)
                       .make(),
                 ),
                 Dimensions.height10.heightBox,

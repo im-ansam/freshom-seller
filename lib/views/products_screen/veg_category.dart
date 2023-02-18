@@ -26,7 +26,7 @@ class VegCategory extends StatelessWidget {
         } else {
           var data = snapshot.data!.docs;
           return GridView.builder(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: data.length,
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -56,9 +56,10 @@ class VegCategory extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.circular(Dimensions.radius10),
                             ),
-                            child: Image.network(
-                              data[index]['v_image'],
+                            child: FadeInImage(
                               fit: BoxFit.cover,
+                              placeholder: const AssetImage(loadingImage),
+                              image: NetworkImage(data[index]['v_image']),
                             )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,7 +70,7 @@ class VegCategory extends StatelessWidget {
                                 BigText(
                                         overFlow: TextOverflow.ellipsis,
                                         text: "${data[index]['v_name']}",
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w700,
                                         size: Dimensions.fontSize16,
                                         color: Colors.grey[800])
                                     .box
@@ -107,15 +108,10 @@ class VegCategory extends StatelessWidget {
                                             )
                                                 .paddingAll(Dimensions.height10)
                                                 .onTap(() {
-                                              switch (i) {
-                                                case 0:
-                                                  break;
-                                                case 1:
-                                                  controller.removeVegetables(
-                                                      data[index].id);
-                                                  VxToast.show(context,
-                                                      msg: "ProductRemoved");
-                                              }
+                                              controller.removeVegetables(
+                                                  data[index].id);
+                                              VxToast.show(context,
+                                                  msg: "ProductRemoved");
                                             }),
                                           ),
                                         )
