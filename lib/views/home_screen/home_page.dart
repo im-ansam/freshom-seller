@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
               text: "Hi,  ${homeController.username}",
               fontWeight: FontWeight.w600,
               color: nicePurple,
-              size: Dimensions.fontSize23,
+              size: Dimensions.fontSize20,
             ),
             Text(intl.DateFormat('EEE , MMM d,' 'yy').format(DateTime.now()),
                 style: GoogleFonts.poppins(
@@ -55,8 +55,8 @@ class HomePage extends StatelessWidget {
               } else {
                 var prof = snapshot.data!.docs[0];
                 return Container(
-                  height: Dimensions.height60,
-                  width: Dimensions.height60,
+                  height: Dimensions.height50,
+                  width: Dimensions.height50,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(prof['imageUrl']),

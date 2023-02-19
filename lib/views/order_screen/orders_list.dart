@@ -75,7 +75,7 @@ class OrdersList extends StatelessWidget {
                                   data: data[index],
                                 ));
                           },
-                          title: "${data[index]['order_code']}"
+                          title: "${data[index]['order_by_email']}"
                               .text
                               .bold
                               .color(nicePurple)
@@ -108,10 +108,17 @@ class OrdersList extends StatelessWidget {
                                     size: Dimensions.icon22,
                                   ),
                                   Dimensions.width10.widthBox,
-                                  unPaid.text.semiBold
-                                      .size(Dimensions.fontSize14)
-                                      .color(priceColor)
-                                      .make()
+                                  data[index]['order_delivered']
+                                      ? "Paid"
+                                          .text
+                                          .semiBold
+                                          .size(Dimensions.fontSize14)
+                                          .color(Colors.green)
+                                          .make()
+                                      : unPaid.text.semiBold
+                                          .size(Dimensions.fontSize14)
+                                          .color(priceColor)
+                                          .make()
                                 ],
                               )
                             ],

@@ -389,19 +389,12 @@ class _MainLoginPageState extends State<MainLoginPage> {
                 isLoading = true;
               });
               await controller.signInMethod().then((value) async {
-                setState(() {
-                  isLoading = false;
-                });
                 if (value != null) {
                   // await controller.checkIsVerified();
-                  VxToast.show(context, msg: loggedIn);
-
+                  await controller.checkUserInCollection(context);
                   setState(() {
                     isLoading = false;
                   });
-                  var sharedPref = await SharedPreferences.getInstance();
-                  sharedPref.setBool('isLogged', true);
-                  Get.offAll(() => const MainHome());
                 } else {
                   setState(() {
                     isLoading = false;

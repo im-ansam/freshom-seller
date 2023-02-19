@@ -1,4 +1,5 @@
 import 'package:fresh_om_seller/const/const.dart';
+import 'package:fresh_om_seller/utils/reusable_big_text.dart';
 
 Widget orderPlaceDetails({data, title1, title2, d1, d2}) {
   return Padding(
@@ -15,12 +16,13 @@ Widget orderPlaceDetails({data, title1, title2, d1, d2}) {
                 .semiBold
                 .color(nicePurple)
                 .make(),
-            "$d1"
-                .text
-                .size(Dimensions.fontSize16)
-                .semiBold
-                .color(priceColor)
-                .make(),
+            BigText(
+              text: "$d1",
+              fontWeight: FontWeight.w700,
+              size: Dimensions.fontSize16,
+              color: priceColor,
+              overFlow: TextOverflow.ellipsis,
+            ).box.width(Dimensions.height120).make()
           ],
         ),
         SizedBox(

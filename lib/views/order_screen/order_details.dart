@@ -143,7 +143,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       .color(mainBackGround)
                       .roundedSM
                       .margin(EdgeInsets.only(top: Dimensions.height10))
-                      .width(Dimensions.height370)
+                      .width(Dimensions.height360)
                       .make(),
                 ),
                 Dimensions.height10.heightBox,
@@ -159,8 +159,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                 Column(
                   children: [
                     orderPlaceDetails(
-                        title1: "Order Code",
-                        d1: '${widget.data['order_code']}',
+                        title1: "Order By Id",
+                        d1: '${widget.data['order_by']}',
                         title2: "Delivery Method",
                         d2: '${widget.data['delivery_method']}'),
                     orderPlaceDetails(

@@ -49,50 +49,51 @@ class _EditProfileState extends State<EditProfile> {
             ),
             actions: [
               TextButton(
-                  onPressed: () async {
-                    isLoading(true);
-                    //if user doesn't choose any file then the link present in database will again pasted in side that
-                    if (controller.profileImgPath.value.isNotEmpty) {
-                      await controller.uploadProfileImg();
-                    } else {
-                      controller.profileImgLink =
-                          controller.snapshotData['imageUrl'];
-                    }
-                    //if the entering oldPassword matches the old password in database then only
-                    // user can change it
+                      onPressed: () async {
+                        isLoading(true);
+                        //if user doesn't choose any file then the link present in database will again pasted in side that
+                        if (controller.profileImgPath.value.isNotEmpty) {
+                          await controller.uploadProfileImg();
+                        } else {
+                          controller.profileImgLink =
+                              controller.snapshotData['imageUrl'];
+                        }
+                        //if the entering oldPassword matches the old password in database then only
+                        // user can change it
 
-                    if (controller.snapshotData['password'] ==
-                        controller.oldPassController.text) {
-                      await controller.changeAuthPassword(
-                          email: controller.snapshotData['email'],
-                          password: controller.oldPassController.text,
-                          newPassword: controller.newPassController.text);
-                      await controller.updateProfile(
-                          imageUrl: controller.profileImgLink,
-                          password: controller.newPassController.text,
-                          name: controller.nameController.text);
-                      VxToast.show(context, msg: "Updated");
-                      isLoading(false);
-                    } else if (controller
-                            .oldPassController.text.isEmptyOrNull &&
-                        controller.newPassController.text.isEmptyOrNull) {
-                      await controller.updateProfile(
-                          imageUrl: controller.profileImgLink,
-                          password: controller.snapshotData['password'],
-                          name: controller.nameController.text);
-                      VxToast.show(context, msg: "Updated");
-                    } else {
-                      VxToast.show(context, msg: "Something went wrong");
-                    }
-                    isLoading(false);
-                  },
-                  child: isLoading.value
-                      ? progressIndicator(white)
-                      : "Save"
-                          .text
-                          .size(Dimensions.fontSize18)
-                          .color(white)
-                          .make())
+                        if (controller.snapshotData['password'] ==
+                            controller.oldPassController.text) {
+                          await controller.changeAuthPassword(
+                              email: controller.snapshotData['email'],
+                              password: controller.oldPassController.text,
+                              newPassword: controller.newPassController.text);
+                          await controller.updateProfile(
+                              imageUrl: controller.profileImgLink,
+                              password: controller.newPassController.text,
+                              name: controller.nameController.text);
+                          VxToast.show(context, msg: "Updated");
+                          isLoading(false);
+                        } else if (controller
+                                .oldPassController.text.isEmptyOrNull &&
+                            controller.newPassController.text.isEmptyOrNull) {
+                          await controller.updateProfile(
+                              imageUrl: controller.profileImgLink,
+                              password: controller.snapshotData['password'],
+                              name: controller.nameController.text);
+                          VxToast.show(context, msg: "Updated");
+                        } else {
+                          VxToast.show(context, msg: "Something went wrong");
+                        }
+                        isLoading(false);
+                      },
+                      child: isLoading.value
+                          ? progressIndicator(white)
+                          : "Save"
+                              .text
+                              .size(Dimensions.fontSize18)
+                              .color(white)
+                              .make())
+                  .paddingOnly(right: Dimensions.width10),
             ],
           ),
           body: SingleChildScrollView(

@@ -21,6 +21,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: nicePurple,
+        toolbarHeight: Dimensions.height80,
         elevation: 0,
         title: BigText(
           text: profile,
@@ -48,7 +49,8 @@ class ProfileScreen extends StatelessWidget {
                 Get.offAll(() => const MainLoginPage());
               },
               child:
-                  logout.text.size(Dimensions.fontSize18).color(white).make())
+                  logout.text.size(Dimensions.fontSize18).color(white).make()),
+          10.widthBox
         ],
       ),
       backgroundColor: nicePurple,
