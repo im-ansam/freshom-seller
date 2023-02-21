@@ -16,14 +16,14 @@ class ChatScreen extends StatelessWidget {
     var controller = Get.put(ChatsController());
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: mainBackGround,
-        foregroundColor: nicePurple,
+        backgroundColor: mainAppColor,
+        foregroundColor: white,
         elevation: 0,
         title: BigText(
           text: "${controller.friendName}",
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           size: Dimensions.fontSize18,
-          color: nicePurple,
+          color: white,
         ),
       ),
       body: Padding(
@@ -32,7 +32,7 @@ class ChatScreen extends StatelessWidget {
           children: [
             Obx(() => controller.isLoading.value
                 ? Container(
-                    child: progressIndicator(nicePurple),
+                    child: progressIndicator(mainAppColor),
                   )
                 : Expanded(
                     child: StreamBuilder(
@@ -41,7 +41,7 @@ class ChatScreen extends StatelessWidget {
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (!snapshot.hasData) {
-                          return progressIndicator(nicePurple);
+                          return progressIndicator(mainAppColor);
                         } else if (snapshot.data!.docs.isEmpty) {
                           return Center(
                             child: "Send a message..."
@@ -79,9 +79,9 @@ class ChatScreen extends StatelessWidget {
                     controller: controller.msgController,
                     decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: nicePurple)),
+                            borderSide: BorderSide(color: mainAppColor)),
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: nicePurple)),
+                            borderSide: BorderSide(color: mainAppColor)),
                         hintText: "Enter Message",
                         border: InputBorder.none),
                   )),
@@ -91,7 +91,7 @@ class ChatScreen extends StatelessWidget {
                       controller.msgController.clear();
                     },
                     icon: const Icon(Icons.send),
-                    color: nicePurple,
+                    color: mainAppColor,
                   )
                 ],
               ),

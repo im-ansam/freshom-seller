@@ -17,14 +17,14 @@ class MessagesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: nicePurple,
-        backgroundColor: mainBackGround,
+        foregroundColor: white,
+        backgroundColor: mainAppColor,
         elevation: 0,
         title: BigText(
           text: messages,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           size: Dimensions.fontSize18,
-          color: nicePurple,
+          color: Colors.white,
         ),
       ),
       backgroundColor: mainBackGround,
@@ -32,13 +32,13 @@ class MessagesList extends StatelessWidget {
         stream: FireStoreServices.getAllMessages(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return progressIndicator(nicePurple);
+            return progressIndicator(mainAppColor);
           } else if (snapshot.data!.docs.isEmpty) {
             return Center(
               child: headingText(
                   text: "No messages found",
                   fontSize: Dimensions.fontSize20,
-                  color: nicePurple),
+                  color: mainAppColor),
             );
           } else {
             var data = snapshot.data!.docs;

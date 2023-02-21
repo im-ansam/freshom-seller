@@ -48,7 +48,7 @@ class _ExpadableTextState extends State<ExpadableText> {
                         : (firstHalf + secondHalf),
                     overFlow: TextOverflow.visible,
                     height: 1.6,
-                    color: nicePurple,
+                    color: mainAppColor,
                   ),
                   const SizedBox(
                     height: 10,
@@ -63,13 +63,13 @@ class _ExpadableTextState extends State<ExpadableText> {
                       children: [
                         Text(
                           "Show more",
-                          style: TextStyle(color: Colors.blueAccent),
+                          style: TextStyle(color: nicePurple),
                         ),
                         Icon(
                           hiddenText
                               ? Icons.arrow_drop_down
                               : Icons.arrow_drop_up,
-                          color: Colors.blueAccent,
+                          color: nicePurple,
                         )
                       ],
                     ),

@@ -17,7 +17,7 @@ Widget chatBubble(DocumentSnapshot data) {
       padding: EdgeInsets.all(Dimensions.height12),
       margin: EdgeInsets.only(bottom: Dimensions.width8),
       decoration: BoxDecoration(
-        color: nicePurple,
+        color: mainAppColor,
         borderRadius: data['uid'] == FirebaseAuth.instance.currentUser!.uid
             ? BorderRadius.only(
                 topRight: Radius.circular(Dimensions.radius20),

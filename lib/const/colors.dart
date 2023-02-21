@@ -27,4 +27,17 @@ const Color nicePurple = Color(0xff2d2b4e);
 const Color niceViolet = Color(0xff6c6dbf);
 const Color niceDarkViolet = Color(0xff525b9d);
 const Color white = Colors.white;
+
+//try colors
+const Color mainAppColor = Color(0xff136050); //0xff136050
+const Color newLightGreen = Color(0xff01ba9b);
+const Color green = Color(0xff35b678);
+const Color gPayGreen = Color(0xff29a952);
+const Color newTeal = Color(0xff028c8c);
+const Color orangeRed = Color(0xfff74d00);
 Color fontGrey = Colors.grey.shade800;
+Color? goldYellow = Colors.yellow[200];
+
+//new trying combination
+const Color newBlue = Color(0xff00314a);
+const Color newGreen = Color(0xff72ff73);

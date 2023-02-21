@@ -19,21 +19,21 @@ class ProductsScreen extends StatelessWidget {
         backgroundColor: mainBackGround,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: mainBackGround,
+          backgroundColor: mainAppColor,
           elevation: 0,
           title: BigText(
             text: "Products",
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w600,
             size: Dimensions.fontSize18,
-            color: nicePurple,
+            color: white,
           ),
           actions: [
             Center(
               child: Text(
                 intl.DateFormat('EEE , MMM d,' 'yy').format(DateTime.now()),
                 style: TextStyle(
-                    fontSize: 18,
-                    color: Vx.gray600,
+                    fontSize: Dimensions.fontSize16,
+                    color: Vx.gray300,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -42,20 +42,25 @@ class ProductsScreen extends StatelessWidget {
         ),
         body: Obx(() => Column(
               children: [
+                Dimensions.height10.heightBox,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     //vegetable category
                     Column(
                       children: [
-                        headingText(text: "Vegetable", fontSize: 18.0),
+                        BigText(
+                          text: "Vegetable",
+                          fontWeight: FontWeight.w600,
+                          size: Dimensions.fontSize15,
+                        ),
                         5.heightBox,
                         AnimatedContainer(
                           duration: Duration(milliseconds: 400),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: isVeg.value
-                                  ? nicePurple
+                                  ? mainAppColor
                                   : Colors.transparent),
                           height: 4,
                           width: 30,
@@ -66,7 +71,8 @@ class ProductsScreen extends StatelessWidget {
                         .height(40)
                         .width(100)
                         .color(isVeg.value ? lightBlue1 : Colors.transparent)
-                        .padding(EdgeInsets.only(top: 5, left: 2, right: 2))
+                        .padding(EdgeInsets.only(
+                            top: 5, left: 2, right: 2, bottom: 2))
                         .roundedSM
                         .makeCentered()
                         .onTap(() {
@@ -77,14 +83,19 @@ class ProductsScreen extends StatelessWidget {
                     //fruit category
                     Column(
                       children: [
-                        headingText(text: "Fruits", fontSize: 18.0),
+                        BigText(
+                          text: "Fruits",
+                          fontWeight: FontWeight.w600,
+                          size: Dimensions.fontSize15,
+                        ),
                         5.heightBox,
                         AnimatedContainer(
                           duration: Duration(milliseconds: 400),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color:
-                                isFruit.value ? nicePurple : Colors.transparent,
+                            color: isFruit.value
+                                ? mainAppColor
+                                : Colors.transparent,
                           ),
                           height: 4,
                           width: 30,

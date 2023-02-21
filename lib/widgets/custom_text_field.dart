@@ -5,7 +5,7 @@ Widget customTextField(
   return TextFormField(
     controller: controller,
     maxLines: isDesc ? 4 : 1,
-    style: TextStyle(color: white),
+    style: const TextStyle(color: white),
     obscureText: isPassword,
     // obscureText: obscureText,
     decoration: InputDecoration(
@@ -16,13 +16,13 @@ Widget customTextField(
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: white),
+          borderSide: const BorderSide(color: white),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: white),
+          borderSide: const BorderSide(color: white),
         ),
         hintText: hint,
-        hintStyle: TextStyle(color: Colors.white54)),
+        hintStyle: const TextStyle(color: Colors.white54)),
   );
 }

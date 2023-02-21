@@ -3,6 +3,8 @@ import 'package:fresh_om_seller/controllers/products_controller.dart';
 import 'package:fresh_om_seller/views/products_screen/add_products/add_fruits.dart';
 import 'package:fresh_om_seller/views/products_screen/add_products/add_vegetables.dart';
 
+import '../../../utils/reusable_big_text.dart';
+
 class AddProducts extends StatelessWidget {
   const AddProducts({Key? key}) : super(key: key);
 
@@ -13,17 +15,18 @@ class AddProducts extends StatelessWidget {
       backgroundColor: mainBackGround,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: mainBackGround,
+        backgroundColor: mainAppColor,
         elevation: 0,
-        title: addProduct.text
-            .size(Dimensions.fontSize18)
-            .color(nicePurple)
-            .semiBold
-            .make(),
+        title: BigText(
+          text: addProduct,
+          fontWeight: FontWeight.w600,
+          size: Dimensions.fontSize18,
+          color: white,
+        ),
       ),
       body: Container(
         padding: EdgeInsets.only(
-            top: Dimensions.height20, bottom: Dimensions.height20),
+            top: Dimensions.height40, bottom: Dimensions.height30),
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,13 +38,13 @@ class AddProducts extends StatelessWidget {
                 //circle image container
                 Container(
                   alignment: Alignment.center,
-                  height: Dimensions.height110,
+                  height: Dimensions.height100,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle, color: Colors.grey[300]),
                   child: Container(
                     height: Dimensions.height85,
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
@@ -52,32 +55,32 @@ class AddProducts extends StatelessWidget {
                 ),
                 Dimensions.height10.heightBox,
                 //category text
-                fruits.text.semiBold
-                    .size(Dimensions.fontSize23)
-                    .letterSpacing(1)
-                    .color(Colors.grey[900])
-                    .make(),
+                BigText(
+                  text: fruits,
+                  fontWeight: FontWeight.w600,
+                  size: Dimensions.fontSize20,
+                  color: nicePurple,
+                ),
                 Dimensions.height15.heightBox,
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: niceViolet),
-                  onPressed: () {
-                    Get.to(() => const AddFruits());
-                  },
-                  child: "Select"
-                      .text
-                      .bold
-                      .size(Dimensions.fontSize16)
-                      .letterSpacing(1)
-                      .color(white)
-                      .make(),
-                )
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: mainAppColor),
+                    onPressed: () {
+                      Get.to(() => const AddFruits());
+                    },
+                    child: BigText(
+                      text: "Select",
+                      fontWeight: FontWeight.w600,
+                      size: Dimensions.fontSize15,
+                      color: white,
+                    ))
               ],
             )
                 .box
                 .shadowMd
-                .width(Dimensions.height250)
+                .width(Dimensions.height230)
                 .padding(EdgeInsets.only(top: Dimensions.height30))
-                .height(Dimensions.height250)
+                .height(Dimensions.height230)
                 .roundedSM
                 .color(white)
                 .make(),
@@ -89,13 +92,13 @@ class AddProducts extends StatelessWidget {
                 //circle image container
                 Container(
                   alignment: Alignment.center,
-                  height: Dimensions.height110,
+                  height: Dimensions.height100,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle, color: Colors.grey[300]),
                   child: Container(
                     height: Dimensions.height85,
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
@@ -113,25 +116,24 @@ class AddProducts extends StatelessWidget {
                     .make(),
                 Dimensions.height15.heightBox,
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: niceViolet),
-                  onPressed: () {
-                    Get.to(() => AddVegetable());
-                  },
-                  child: "Select"
-                      .text
-                      .bold
-                      .size(Dimensions.fontSize16)
-                      .letterSpacing(1)
-                      .color(white)
-                      .make(),
-                )
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: mainAppColor),
+                    onPressed: () {
+                      Get.to(() => const AddVegetable());
+                    },
+                    child: BigText(
+                      text: "Select",
+                      fontWeight: FontWeight.w600,
+                      size: Dimensions.fontSize15,
+                      color: white,
+                    ))
               ],
             )
                 .box
                 .shadowMd
-                .width(Dimensions.height250)
+                .width(Dimensions.height230)
                 .padding(EdgeInsets.only(top: Dimensions.height30))
-                .height(Dimensions.height250)
+                .height(Dimensions.height230)
                 .roundedSM
                 .color(white)
                 .make()

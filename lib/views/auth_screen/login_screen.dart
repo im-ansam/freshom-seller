@@ -1,5 +1,6 @@
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/auth_controller.dart';
+import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/auth_screen/Admin_verification_screen.dart';
 import 'package:fresh_om_seller/views/auth_screen/forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,18 +39,18 @@ class _MainLoginPageState extends State<MainLoginPage> {
           children: [
             Image.asset("images/logoMain2.png", height: Dimensions.height90),
             Dimensions.height10.heightBox,
-            BigText(
-              text: "Fresh'Om",
-              fontWeight: FontWeight.w700,
+            appNameText(
+              text: 'Fresh\'Om',
+              fontWeight: FontWeight.w500,
               size: Dimensions.fontSize25,
-              color: nicePurple,
+              color: mainAppColor,
             ),
-            "Seller"
-                .text
-                .semiBold
-                .color(nicePurple)
-                .size(Dimensions.fontSize16)
-                .make(),
+            BigText(
+              text: "Seller",
+              fontWeight: FontWeight.w500,
+              color: mainAppColor,
+              size: Dimensions.fontSize16,
+            ),
           ],
         ),
       ),
@@ -66,7 +67,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                 padding: EdgeInsets.only(
                     top: Dimensions.height100, left: Dimensions.width20),
                 height: Dimensions.height300,
-                color: nicePurple,
+                color: mainAppColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -77,7 +78,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                               text: isSignUpScreen ? "Welcome to" : "Welcome",
                               style: GoogleFonts.poppins(
                                   fontSize: Dimensions.fontSize25,
-                                  color: Colors.yellow[200],
+                                  color: Colors.white,
                                   letterSpacing: 2),
                               children: [
                                 TextSpan(
@@ -85,9 +86,9 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                         ? " Fresh'Om,"
                                         : " Back,",
                                     style: GoogleFonts.poppins(
-                                      fontSize: Dimensions.fontSize30,
+                                      fontSize: Dimensions.fontSize27,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.yellow[200],
+                                      color: Colors.white,
                                     ))
                               ]),
                         ),
@@ -95,20 +96,20 @@ class _MainLoginPageState extends State<MainLoginPage> {
                     ),
                     5.heightBox,
                     isSignUpScreen
-                        ? "Signup to Continue"
-                            .text
-                            .size(Dimensions.fontSize18)
-                            .letterSpacing(2)
-                            .color(Colors.white54)
-                            .semiBold
-                            .make()
-                        : "Signin to Continue"
-                            .text
-                            .size(Dimensions.fontSize18)
-                            .letterSpacing(2)
-                            .color(Colors.white54)
-                            .semiBold
-                            .make()
+                        ? BigText(
+                            text: "Signup to Continue",
+                            fontWeight: FontWeight.w600,
+                            letterSpace: 2,
+                            color: Colors.white54,
+                            size: Dimensions.fontSize18,
+                          )
+                        : BigText(
+                            text: "SignIn to Continue",
+                            fontWeight: FontWeight.w600,
+                            letterSpace: 2,
+                            color: Colors.white54,
+                            size: Dimensions.fontSize18,
+                          )
                   ],
                 ),
               )),
@@ -155,10 +156,10 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                 BigText(
                                   text: "LOGIN",
                                   fontWeight: FontWeight.bold,
-                                  size: Dimensions.fontSize18,
                                   color: isSignUpScreen
                                       ? inactiveTextColor
-                                      : nicePurple,
+                                      : mainAppColor,
+                                  size: Dimensions.fontSize20,
                                 ),
                                 if (!isSignUpScreen)
                                   Container(
@@ -181,10 +182,10 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                 BigText(
                                   text: "SIGNUP",
                                   fontWeight: FontWeight.bold,
-                                  size: Dimensions.fontSize18,
                                   color: isSignUpScreen
-                                      ? nicePurple
+                                      ? mainAppColor
                                       : inactiveTextColor,
+                                  size: Dimensions.fontSize20,
                                 ),
                                 if (isSignUpScreen)
                                   Container(
@@ -215,23 +216,25 @@ class _MainLoginPageState extends State<MainLoginPage> {
 
   Container buildLoginContainer() {
     return Container(
-      margin: const EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: Dimensions.height20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           buildTextField(Icons.email_outlined, "Email", false, true,
               controller.emailController),
           buildTextField(Icons.lock, "Password", true, false,
               controller.passwordController),
-          TextButton(
-            onPressed: () {
-              Get.to(() => const ResetPassword());
-            },
-            child: BigText(
-              text: "Forgot Password?",
-              fontWeight: FontWeight.w600,
-              size: Dimensions.fontSize16,
-              color: nicePurple,
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+                Get.to(() => const ResetPassword());
+              },
+              child: BigText(
+                text: "Forgot Password?",
+                fontWeight: FontWeight.bold,
+                color: mainAppColor,
+                size: Dimensions.fontSize15,
+              ),
             ),
           )
         ],
@@ -268,7 +271,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                 hintText: "Password",
                 suffixIcon: Icon(
                   Icons.remove_red_eye,
-                  color: isObscure ? inactiveTextColor : nicePurple,
+                  color: isObscure ? inactiveTextColor : mainAppColor,
                 ).onTap(() {
                   setState(() {
                     if (isObscure == false) {
@@ -300,8 +303,8 @@ class _MainLoginPageState extends State<MainLoginPage> {
             : Dimensions.height450 + Dimensions.height10,
         child: Container(
           alignment: Alignment.center,
-          height: Dimensions.height90,
-          width: Dimensions.height90,
+          height: Dimensions.height80,
+          width: Dimensions.height80,
           decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
@@ -314,8 +317,8 @@ class _MainLoginPageState extends State<MainLoginPage> {
                       offset: const Offset(0, 1))
               ]),
           child: Container(
-            height: Dimensions.height60,
-            width: Dimensions.height60,
+            height: Dimensions.height50,
+            width: Dimensions.height50,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.redAccent,

@@ -28,7 +28,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => (Scaffold(
-          backgroundColor: nicePurple,
+          backgroundColor: mainAppColor,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             leading: const Icon(
@@ -39,11 +39,11 @@ class _EditProfileState extends State<EditProfile> {
               controller.oldPassController.clear();
               controller.newPassController.clear();
             }),
-            backgroundColor: nicePurple,
+            backgroundColor: mainAppColor,
             elevation: 0,
             title: BigText(
               text: editProfile,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w600,
               size: Dimensions.fontSize18,
               color: white,
             ),
@@ -104,33 +104,39 @@ class _EditProfileState extends State<EditProfile> {
                 children: [
                   //top profile image container
                   Container(
-                    clipBehavior: Clip.antiAlias,
-                    height: Dimensions.height120,
-                    decoration: const BoxDecoration(shape: BoxShape.circle),
-                    child: controller.snapshotData['imageUrl'] == "" &&
-                            controller.profileImgPath.isEmpty
+                    alignment: Alignment.center,
+                    height: Dimensions.height140,
+                    decoration: const BoxDecoration(
+                        color: Colors.white54, shape: BoxShape.circle),
+                    child: Container(
+                      clipBehavior: Clip.antiAlias,
+                      height: Dimensions.height140,
+                      decoration: BoxDecoration(shape: BoxShape.circle),
+                      child: controller.snapshotData['imageUrl'] == "" &&
+                              controller.profileImgPath.isEmpty
 
-                        //default asset image will show
-                        ? Image.asset(
-                            cameraLogo,
-                            fit: BoxFit.cover,
-                          )
+                          //default asset image will show
+                          ? Image.asset(
+                              cameraLogo,
+                              fit: BoxFit.cover,
+                            )
 
-                        //else if imageUrl of database is not empty but profile image path is empty
-                        : controller.snapshotData['imageUrl'] != "" &&
-                                controller.profileImgPath.isEmpty
+                          //else if imageUrl of database is not empty but profile image path is empty
+                          : controller.snapshotData['imageUrl'] != "" &&
+                                  controller.profileImgPath.isEmpty
 
-                            //
-                            ? Image.network(
-                                controller.snapshotData['imageUrl'],
-                                fit: BoxFit.cover,
-                              )
+                              //
+                              ? Image.network(
+                                  controller.snapshotData['imageUrl'],
+                                  fit: BoxFit.cover,
+                                )
 
-                            //else selected image will show
-                            : Image.file(
-                                File(controller.profileImgPath.value),
-                                fit: BoxFit.cover,
-                              ),
+                              //else selected image will show
+                              : Image.file(
+                                  File(controller.profileImgPath.value),
+                                  fit: BoxFit.cover,
+                                ),
+                    ),
                   ),
                   Dimensions.height10.heightBox,
                   ElevatedButton(

@@ -3,6 +3,7 @@ import 'package:fresh_om_seller/controllers/auth_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/reusable_big_text.dart';
+import '../../utils/reusable_text.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key? key}) : super(key: key);
@@ -23,43 +24,42 @@ class _ResetPasswordState extends State<ResetPassword> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            //top purple background container
+            //top background container
             Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
                 child: Container(
                   padding: EdgeInsets.only(
-                      top: Dimensions.height100, left: Dimensions.width20),
+                      top: Dimensions.height90, left: Dimensions.width20),
                   height: Dimensions.height300,
-                  color: nicePurple,
+                  color: mainAppColor,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Align(
-                        alignment: Alignment.center,
-                        child: BigText(
-                          text: "Fresh'Om",
-                          fontWeight: FontWeight.bold,
-                          size: Dimensions.fontSize50,
-                          color: white,
-                        ),
+                        alignment: Alignment.topCenter,
+                        child: appNameText(
+                            text: 'Fresh\'Om',
+                            color: Colors.white,
+                            size: Dimensions.fontSize50,
+                            fontWeight: FontWeight.w500),
                       ),
                       Dimensions.height10.heightBox,
                       RichText(
                         text: TextSpan(
                             text: "Reset your",
-                            style: GoogleFonts.poppins(
+                            style: TextStyle(
                                 fontSize: Dimensions.fontSize25,
-                                color: Colors.yellow[200],
-                                letterSpacing: 1),
+                                color: Colors.white,
+                                letterSpacing: 2),
                             children: [
                               TextSpan(
                                   text: " Password,",
-                                  style: GoogleFonts.poppins(
+                                  style: TextStyle(
                                     fontSize: Dimensions.fontSize30,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.yellow[200],
+                                    color: Colors.white,
                                   ))
                             ]),
                       ),
@@ -69,7 +69,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             buildBottomHalfContainer(true),
             //center reset password container
             Positioned(
-                top: Dimensions.height250,
+                top: Dimensions.height230,
                 left: Dimensions.width20,
                 right: 20,
                 child: Container(
@@ -77,7 +77,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       left: Dimensions.width10,
                       right: Dimensions.width10,
                       bottom: Dimensions.height20),
-                  height: Dimensions.height190,
+                  height: Dimensions.height167,
                   width: Dimensions.screenWidth - 40,
                   margin: EdgeInsets.symmetric(horizontal: Dimensions.width20),
                   decoration: BoxDecoration(
@@ -96,7 +96,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         text: "Email",
                         fontWeight: FontWeight.w700,
                         size: Dimensions.fontSize16,
-                        color: nicePurple,
+                        color: mainAppColor,
                       ).paddingOnly(
                           left: Dimensions.width10,
                           bottom: Dimensions.height10),
@@ -133,11 +133,11 @@ class _ResetPasswordState extends State<ResetPassword> {
             buildBottomHalfContainer(false),
             //bottom back button
             Positioned(
-              bottom: 20,
-              left: 20,
+              bottom: Dimensions.height20,
+              left: Dimensions.height20,
               child: Container(
-                height: Dimensions.height60,
-                width: Dimensions.height60,
+                height: Dimensions.height50,
+                width: Dimensions.height50,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.redAccent,
@@ -170,13 +170,12 @@ class _ResetPasswordState extends State<ResetPassword> {
   }
 
   Widget buildBottomHalfContainer(bool showShadow) {
-    // var controller = Get.find<AuthController>();
     return Positioned(
-        top: Dimensions.height190 * 2 + Dimensions.height10,
+        top: Dimensions.height350,
         child: Container(
           alignment: Alignment.center,
-          height: Dimensions.height90,
-          width: Dimensions.height90,
+          height: Dimensions.height80,
+          width: Dimensions.height80,
           decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
@@ -189,8 +188,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                       offset: const Offset(0, 1))
               ]),
           child: Container(
-                  height: Dimensions.height60,
-                  width: Dimensions.height60,
+                  height: Dimensions.height50,
+                  width: Dimensions.height50,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.redAccent,

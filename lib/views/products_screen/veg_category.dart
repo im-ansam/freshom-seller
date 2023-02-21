@@ -5,8 +5,8 @@ import 'package:fresh_om_seller/controllers/products_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
 import 'package:fresh_om_seller/utils/reusable_big_text.dart';
 import 'package:fresh_om_seller/utils/reusable_circular_indicator.dart';
-import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/products_screen/details/veg_detail_page.dart';
+import 'package:lottie/lottie.dart';
 
 class VegCategory extends StatelessWidget {
   const VegCategory({Key? key}) : super(key: key);
@@ -22,7 +22,25 @@ class VegCategory extends StatelessWidget {
           return progressIndicator(nicePurple);
         } else if (snapshot.data!.docs.isEmpty) {
           return Center(
-              child: headingText(text: "You have not added any products"));
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  height: Dimensions.height350,
+                  width: Dimensions.screenWidth - 30,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius10)),
+                  child: Lottie.asset(noOrders, fit: BoxFit.cover)),
+              20.heightBox,
+              BigText(
+                text: "You have not added any products",
+                fontWeight: FontWeight.w500,
+                size: Dimensions.fontSize18,
+                color: Colors.grey[600],
+              )
+            ],
+          ));
         } else {
           var data = snapshot.data!.docs;
           return GridView.builder(
@@ -86,7 +104,6 @@ class VegCategory extends StatelessWidget {
                               ],
                             ),
                             VxPopupMenu(
-                                    child: Icon(Icons.more_vert),
                                     menuBuilder: () => Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
@@ -111,7 +128,7 @@ class VegCategory extends StatelessWidget {
                                               controller.removeVegetables(
                                                   data[index].id);
                                               VxToast.show(context,
-                                                  msg: "ProductRemoved");
+                                                  msg: "Product Removed");
                                             }),
                                           ),
                                         )
@@ -120,7 +137,11 @@ class VegCategory extends StatelessWidget {
                                             .roundedSM
                                             .width(Dimensions.height100 * 2)
                                             .make(),
-                                    clickType: VxClickType.singleClick)
+                                    clickType: VxClickType.singleClick,
+                                    child: const Icon(
+                                      Icons.more_vert,
+                                      color: mainAppColor,
+                                    ))
                                 .paddingOnly(
                                     right: Dimensions.width10,
                                     top: Dimensions.height20)

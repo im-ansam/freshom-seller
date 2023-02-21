@@ -20,7 +20,7 @@ Widget orderPlaceDetails({data, title1, title2, d1, d2}) {
               text: "$d1",
               fontWeight: FontWeight.w700,
               size: Dimensions.fontSize16,
-              color: priceColor,
+              color: orangeRed,
               overFlow: TextOverflow.ellipsis,
             ).box.width(Dimensions.height120).make()
           ],

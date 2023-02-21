@@ -3,6 +3,8 @@ import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/widgets/expandable_text.dart';
 import 'package:fresh_om_seller/widgets/reusable_small_text.dart';
 
+import '../../../utils/reusable_big_text.dart';
+
 class VegDetail extends StatelessWidget {
   final dynamic data;
   const VegDetail({Key? key, this.data}) : super(key: key);
@@ -30,24 +32,20 @@ class VegDetail extends StatelessWidget {
           ),
           //buttons
           Positioned(
-              top: Dimensions.height55,
-              left: Dimensions.height20,
-              right: Dimensions.height20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    child: Icon(
-                      Icons.clear,
-                      color: fontGrey,
-                      size: Dimensions.icon30,
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              )),
+            top: Dimensions.height55,
+            left: Dimensions.height20,
+            right: Dimensions.height20,
+            child: CircleAvatar(
+                radius: Dimensions.radius18,
+                backgroundColor: lightGreen1,
+                child: Icon(
+                  Icons.clear,
+                  color: nicePurple,
+                  size: Dimensions.icon25,
+                )).onTap(() {
+              Get.back();
+            }),
+          ),
           //food detail
           Positioned(
             bottom: 0,
@@ -76,19 +74,18 @@ class VegDetail extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      data['v_name'],
-                      style: TextStyle(
-                          fontSize: Dimensions.fontSize23,
-                          color: fontGrey,
-                          fontWeight: FontWeight.w700),
+                    BigText(
+                      text: data['v_name'],
+                      fontWeight: FontWeight.w600,
+                      color: nicePurple,
+                      size: Dimensions.fontSize23,
                     ),
                     10.heightBox,
                     "Rs${data['v_price']}/kg"
                         .text
                         .bold
                         .size(Dimensions.fontSize20)
-                        .color(Colors.redAccent)
+                        .color(orangeRed)
                         .make(),
                     SizedBox(
                       height: Dimensions.height20,
@@ -96,17 +93,16 @@ class VegDetail extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Quantity-",
-                          style: TextStyle(
-                              fontSize: Dimensions.fontSize20,
-                              color: fontGrey,
-                              fontWeight: FontWeight.w700),
+                        BigText(
+                          text: "Quantity :",
+                          fontWeight: FontWeight.w600,
+                          color: nicePurple,
+                          size: Dimensions.fontSize18,
                         ),
                         Text(
                           "${data['v_qty']}kg",
                           style: TextStyle(
-                              fontSize: Dimensions.fontSize20,
+                              fontSize: Dimensions.fontSize18,
                               color: Vx.gray600,
                               fontWeight: FontWeight.w500),
                         )
@@ -114,9 +110,37 @@ class VegDetail extends StatelessWidget {
                     )
                         .box
                         .alignCenterLeft
-                        .color(darkCream)
+                        .color(Colors.grey[300]!)
                         .roundedSM
-                        .padding(EdgeInsets.only(left: 10, right: 10))
+                        .padding(const EdgeInsets.only(left: 10, right: 10))
+                        .shadowSm
+                        .width(double.infinity)
+                        .height(40)
+                        .make(),
+                    20.heightBox,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        BigText(
+                          text: "Uploaded date :",
+                          fontWeight: FontWeight.w600,
+                          color: nicePurple,
+                          size: Dimensions.fontSize18,
+                        ),
+                        Text(
+                          "${data['v_uploaded_date']}",
+                          style: TextStyle(
+                              fontSize: Dimensions.fontSize18,
+                              color: Vx.gray600,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    )
+                        .box
+                        .alignCenterLeft
+                        .color(Colors.grey[300]!)
+                        .roundedSM
+                        .padding(const EdgeInsets.only(left: 10, right: 10))
                         .shadowSm
                         .width(double.infinity)
                         .height(40)
@@ -129,12 +153,11 @@ class VegDetail extends StatelessWidget {
                     SizedBox(
                       height: Dimensions.height10,
                     ),
-                    Text(
-                      "Description",
-                      style: TextStyle(
-                          fontSize: Dimensions.fontSize23,
-                          color: fontGrey,
-                          fontWeight: FontWeight.w700),
+                    BigText(
+                      text: 'Description',
+                      fontWeight: FontWeight.w600,
+                      color: nicePurple,
+                      size: Dimensions.fontSize23,
                     ),
                     SizedBox(
                       height: Dimensions.height20,

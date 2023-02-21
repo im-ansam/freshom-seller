@@ -26,34 +26,32 @@ class MainHome extends StatelessWidget {
       BottomNavigationBarItem(
           icon: Icon(
             Icons.home_outlined,
-            size: Dimensions.icon28,
+            size: Dimensions.icon25,
           ),
           label: dashboard),
       BottomNavigationBarItem(
-          icon: Image.asset(
-            productsIcon,
-            width: Dimensions.height25,
-            color: Colors.grey.shade700,
+          icon: Icon(
+            Icons.category_outlined,
+            size: Dimensions.icon25,
           ),
           label: products),
       BottomNavigationBarItem(
         icon: Image.asset(
           addIcon,
-          width: Dimensions.height60,
+          width: Dimensions.height50,
         ),
         label: '',
       ),
       BottomNavigationBarItem(
-          icon: Image.asset(
-            orderLogo,
-            width: Dimensions.height25,
-            color: Colors.grey.shade700,
+          icon: Icon(
+            Icons.list_alt_outlined,
+            size: Dimensions.icon25,
           ),
           label: orders),
       BottomNavigationBarItem(
           icon: Icon(
             Icons.person_outline,
-            size: Dimensions.icon30,
+            size: Dimensions.icon25,
           ),
           label: profile)
     ];
@@ -68,8 +66,8 @@ class MainHome extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             backgroundColor: mainBackGround,
             elevation: 0,
-            selectedItemColor: niceBlue,
-            unselectedItemColor: Colors.grey.shade700,
+            selectedItemColor: mainAppColor,
+            unselectedItemColor: Colors.grey.shade600,
             items: bottomNavBar,
           )),
       body: Column(

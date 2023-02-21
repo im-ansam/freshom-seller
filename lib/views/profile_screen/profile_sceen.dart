@@ -20,12 +20,12 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: nicePurple,
+        backgroundColor: mainAppColor,
         toolbarHeight: Dimensions.height80,
         elevation: 0,
         title: BigText(
           text: profile,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           size: Dimensions.fontSize18,
           color: white,
         ),
@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
           10.widthBox
         ],
       ),
-      backgroundColor: nicePurple,
+      backgroundColor: mainAppColor,
       body: Column(
         children: [
           //top profile details row

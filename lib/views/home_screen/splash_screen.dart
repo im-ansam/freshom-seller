@@ -4,6 +4,7 @@ import 'package:fresh_om_seller/views/home_screen/main_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import '../../utils/reusable_big_text.dart';
+import '../../utils/reusable_text.dart';
 import '../../widgets/reusable_small_text.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,55 +44,56 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: nicePurple,
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           children: [
             SizedBox(
               height: Dimensions.height300,
             ),
-            Container(
-              height: Dimensions.height120,
-              width: Dimensions.width50 * 2,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(Dimensions.radius30),
-                      topRight: Radius.circular(Dimensions.radius30)),
-                  color: Colors.white70,
-                  image: const DecorationImage(
-                      image: AssetImage('images/logoMain1.png'))),
+            // Container(
+            //   height: Dimensions.height120,
+            //   width: Dimensions.width50 * 2,
+            //   decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.only(
+            //           bottomLeft: Radius.circular(Dimensions.radius30),
+            //           topRight: Radius.circular(Dimensions.radius30)),
+            //       color: Colors.white70,
+            //       image: DecorationImage(
+            //           image: AssetImage('images/logoMain1.png'))),
+            // ),
+
+            Image.asset(
+              'images/logoMain1.png',
+              height: 140,
             ),
             SizedBox(
-              height: Dimensions.height20,
+              height: Dimensions.height10,
             ),
-            BigText(
-              fontWeight: FontWeight.bold,
-              text: "Fresh'Om",
-              color: Colors.white,
-              size: Dimensions.fontSize30,
-            ),
-            BigText(
-              fontWeight: FontWeight.bold,
-              text: "Seller",
-              color: Colors.white,
-              size: Dimensions.fontSize15,
-            ),
+
+            appNameText(
+                text: 'Fresh\'Om',
+                color: mainAppColor,
+                size: 30.0,
+                fontWeight: FontWeight.w500),
+            appNameText(
+                text: 'Seller',
+                color: mainAppColor,
+                size: 25.0,
+                fontWeight: FontWeight.w500),
+            // BoldText(
+            //   fontWeight: FontWeight.bold,
+            //   text: "Fresh'Om",
+            //   color: AppColors.mainAppColor,
+            //   size: Dimensions.fontSize30,
+            // ),
             SizedBox(
               height: Dimensions.height10,
             ),
             SmallText(
               text: "version 1.0.0",
-              color: Colors.white70,
+              color: Colors.grey[400],
             ),
-            const Spacer(),
-            Padding(
-              padding: EdgeInsets.only(bottom: Dimensions.height10),
-              child: Text(
-                "@ansamcd",
-                style: TextStyle(
-                    color: Colors.white, fontSize: Dimensions.fontSize15),
-              ),
-            )
           ],
         ),
       ),

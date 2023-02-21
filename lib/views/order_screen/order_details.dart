@@ -1,6 +1,5 @@
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/orders_controller.dart';
-import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/order_screen/Components/order_place_details.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -33,16 +32,15 @@ class _OrderDetailsState extends State<OrderDetails> {
           bottomNavigationBar: Visibility(
             visible: !controller.confirmed.value,
             child: Container(
-              alignment: Alignment.center,
-              color: nicePurple,
-              height: 60,
-              child: "Confirm Order"
-                  .text
-                  .size(Dimensions.fontSize16)
-                  .semiBold
-                  .color(white)
-                  .make(),
-            ).onTap(() {
+                alignment: Alignment.center,
+                height: Dimensions.height55,
+                color: mainAppColor,
+                child: BigText(
+                  text: "Confirm Order",
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  size: Dimensions.fontSize16,
+                )).onTap(() {
               controller.confirmed(true);
               controller.changeOrder(
                   title: "order_confirmed",
@@ -51,14 +49,14 @@ class _OrderDetailsState extends State<OrderDetails> {
             }),
           ),
           appBar: AppBar(
-            foregroundColor: nicePurple,
-            backgroundColor: mainBackGround,
+            foregroundColor: white,
+            backgroundColor: mainAppColor,
             elevation: 0,
             title: BigText(
               text: orderDetails,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w600,
               size: Dimensions.fontSize18,
-              color: nicePurple,
+              color: white,
             ),
           ),
           body: SingleChildScrollView(
@@ -66,6 +64,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             child: Column(
               children: [
                 //delivery status section
+                Dimensions.height10.heightBox,
                 Visibility(
                   visible: controller.confirmed.value,
                   child: Column(
@@ -79,7 +78,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       ).paddingOnly(
                           left: Dimensions.width10, top: Dimensions.height10),
                       SwitchListTile(
-                        activeColor: mainGreen,
+                        activeColor: mainAppColor,
                         value: true,
                         onChanged: (value) {},
                         title: const BigText(
@@ -90,7 +89,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ),
                       ),
                       SwitchListTile(
-                        activeColor: mainGreen,
+                        activeColor: mainAppColor,
                         value: controller.confirmed.value,
                         onChanged: (value) {
                           controller.confirmed.value = value;
@@ -103,7 +102,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ),
                       ),
                       SwitchListTile(
-                        activeColor: mainGreen,
+                        activeColor: mainAppColor,
                         value: controller.onDelivery.value,
                         onChanged: (value) {
                           controller.onDelivery.value = value;
@@ -120,7 +119,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ),
                       ),
                       SwitchListTile(
-                        activeColor: mainGreen,
+                        activeColor: mainAppColor,
                         value: controller.delivered.value,
                         onChanged: (value) {
                           controller.delivered.value = value;
@@ -143,7 +142,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       .color(mainBackGround)
                       .roundedSM
                       .margin(EdgeInsets.only(top: Dimensions.height10))
-                      .width(Dimensions.height360)
+                      .width(Dimensions.height360 - Dimensions.height10)
                       .make(),
                 ),
                 Dimensions.height10.heightBox,
@@ -172,7 +171,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                         d2: '${widget.data['payment_method']}'),
                     orderPlaceDetails(
                         title1: "Payment Status",
-                        d1: "Unpaid",
+                        d1: widget.data['order_delivered'] == true
+                            ? "Paid"
+                            : "Unpaid",
                         title2: "Delivery Status",
                         d2: "Order Placed"),
                     Row(
@@ -217,7 +218,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               "Total Amount"
                                   .text
                                   .semiBold
-                                  .size(Dimensions.fontSize15)
+                                  .size(Dimensions.fontSize16)
                                   .color(nicePurple)
                                   .make(),
                               Dimensions.height30.heightBox,
@@ -225,7 +226,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   .text
                                   .bold
                                   .size(Dimensions.fontSize20)
-                                  .color(priceColor)
+                                  .color(orangeRed)
                                   .make(),
                             ],
                           ),

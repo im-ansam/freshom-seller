@@ -6,6 +6,8 @@ import 'package:fresh_om_seller/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart' as intl;
 import 'dart:io';
 
+import '../../../utils/reusable_big_text.dart';
+
 class AddFruits extends StatelessWidget {
   const AddFruits({Key? key}) : super(key: key);
 
@@ -21,12 +23,17 @@ class AddFruits extends StatelessWidget {
                 Get.back();
                 controller.productImage('');
               },
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
             ),
             foregroundColor: white,
-            backgroundColor: nicePurple,
+            backgroundColor: mainAppColor,
             elevation: 0,
-            title: addProduct.text.size(Dimensions.fontSize18).semiBold.make(),
+            title: BigText(
+              text: addProduct,
+              fontWeight: FontWeight.w600,
+              size: Dimensions.fontSize18,
+              color: white,
+            ),
             actions: [
               controller.isLoading.value
                   ? progressIndicator(white)
@@ -48,7 +55,7 @@ class AddFruits extends StatelessWidget {
                           "Save".text.white.size(Dimensions.fontSize18).make())
             ],
           ),
-          backgroundColor: nicePurple,
+          backgroundColor: mainAppColor,
           body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(

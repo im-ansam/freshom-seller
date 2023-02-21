@@ -7,6 +7,7 @@ import 'package:fresh_om_seller/utils/reusable_circular_indicator.dart';
 import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/order_screen/order_details.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:lottie/lottie.dart';
 
 import '../../utils/reusable_big_text.dart';
 
@@ -20,21 +21,21 @@ class OrdersList extends StatelessWidget {
       backgroundColor: mainBackGround,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: mainBackGround,
+        backgroundColor: mainAppColor,
         elevation: 0,
         title: BigText(
           text: orders,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           size: Dimensions.fontSize18,
-          color: nicePurple,
+          color: Colors.white,
         ),
         actions: [
           Center(
             child: Text(
               intl.DateFormat('EEE , MMM d,' 'yy').format(DateTime.now()),
               style: TextStyle(
-                  fontSize: Dimensions.fontSize18,
-                  color: Vx.gray600,
+                  fontSize: Dimensions.fontSize16,
+                  color: Vx.gray300,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -46,13 +47,29 @@ class OrdersList extends StatelessWidget {
             FireStoreServices.getOrders(FirebaseAuth.instance.currentUser!.uid),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return progressIndicator(nicePurple);
+            return progressIndicator(mainAppColor);
           } else if (snapshot.data!.docs.isEmpty) {
             return Center(
-              child: headingText(
-                  text: "No Order Yet!",
-                  color: nicePurple,
-                  fontSize: Dimensions.fontSize20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      height: Dimensions.height350,
+                      width: Dimensions.screenWidth - 30,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius10)),
+                      child: Lottie.asset(noOrders, fit: BoxFit.cover)),
+                  20.heightBox,
+                  BigText(
+                    text: "No Orders Yet",
+                    fontWeight: FontWeight.w500,
+                    size: Dimensions.fontSize18,
+                    color: Colors.grey[600],
+                  ),
+                ],
+              ),
             );
           } else {
             var data = snapshot.data!.docs;

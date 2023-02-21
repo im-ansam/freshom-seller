@@ -52,12 +52,14 @@ class ProductsController extends GetxController {
     var store = fireStore.collection(fruitsCollection).doc();
 
     store.set({
+      'f_id': store.id, //new added change
       'f_desc': fDescController.text,
       'f_image': imageUrl,
       'f_name': fNameController.text,
       'f_price': fPriceController.text,
-      'f_qty': fQtyController.text,
+      'f_qty': int.parse(fQtyController.text), //new added change
       'f_uploaded_date': time,
+      'currentTimeStamp': DateTime.now(),
       'seller_name': Get.find<HomeController>().username,
       'seller_id': FirebaseAuth.instance.currentUser!.uid
     });
@@ -70,12 +72,14 @@ class ProductsController extends GetxController {
     var store = fireStore.collection(vegetableCollection).doc();
 
     store.set({
+      'v_id': store.id, //new added change
       'v_desc': vDescController.text,
       'v_image': imageUrl,
       'v_name': vNameController.text,
       'v_price': vPriceController.text,
-      'v_qty': vQtyController.text,
+      'v_qty': int.parse(vQtyController.text), //new added change
       'v_uploaded_date': time,
+      'currentTimeStamp': DateTime.now(),
       'seller_name': Get.find<HomeController>().username,
       'seller_id': FirebaseAuth.instance.currentUser!.uid
     });

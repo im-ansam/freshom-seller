@@ -23,7 +23,7 @@ class VerificationScreen extends StatelessWidget {
           if (!snapshot.hasData) {
             return const Center(
               child: CircularProgressIndicator(
-                color: nicePurple,
+                color: mainAppColor,
               ),
             );
           } else {
@@ -40,10 +40,10 @@ class VerificationScreen extends StatelessWidget {
                       Dimensions.height10.heightBox,
                       BigText(
                         text:
-                            "Huray.. your account is verified you can enter now.",
+                            "Huray.. your account is verified \nyou can enter now.",
                         fontWeight: FontWeight.bold,
                         size: Dimensions.fontSize20,
-                        color: niceDarkViolet,
+                        color: mainAppColor,
                       ).paddingOnly(left: Dimensions.width20),
                       Dimensions.height30.heightBox,
                       headingText(
@@ -55,7 +55,7 @@ class VerificationScreen extends StatelessWidget {
                           .alignCenter
                           .width(Dimensions.height80 * 2)
                           .height(Dimensions.height50)
-                          .color(mainGreen)
+                          .color(mainAppColor)
                           .shadowSm
                           .make()
                           .onTap(() async {
@@ -71,27 +71,28 @@ class VerificationScreen extends StatelessWidget {
                     children: [
                       Lottie.asset(verifyPendingGif),
                       Dimensions.height20.heightBox,
-                      "Your phiysical verification is in progress.."
-                          .text
-                          .size(Dimensions.fontSize20)
-                          .bold
-                          .color(priceColor)
-                          .make(),
+                      BigText(
+                        text: "Your phiysical verification is \nin progress..",
+                        fontWeight: FontWeight.w600,
+                        color: nicePurple,
+                        size: Dimensions.fontSize20,
+                      ),
                       Dimensions.height20.heightBox,
-                      "You will be able to enter this app only when\nadmin "
-                              "visits your place and verify!"
-                          .text
-                          .size(Dimensions.fontSize18)
-                          .bold
-                          .color(nicePurple)
-                          .make(),
+                      BigText(
+                        text:
+                            "You will be able to enter this app only\n whenadmin "
+                            "visits your place and verify!",
+                        fontWeight: FontWeight.w600,
+                        color: mainAppColor,
+                        size: Dimensions.fontSize16,
+                      ),
                       Dimensions.height10.heightBox,
-                      "(Check your email and verify it also)"
-                          .text
-                          .size(Dimensions.fontSize15)
-                          .bold
-                          .color(niceViolet)
-                          .make(),
+                      BigText(
+                        text: "(Check your email and verify it also)",
+                        fontWeight: FontWeight.w600,
+                        color: orangeRed,
+                        size: Dimensions.fontSize14,
+                      ),
                     ],
                   ).paddingOnly(left: Dimensions.width10);
           }

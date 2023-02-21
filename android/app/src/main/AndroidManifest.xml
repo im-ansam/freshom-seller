@@ -3,7 +3,7 @@
    <application
         android:label="fresh_om_seller"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/fresh">
         <activity
             android:name=".MainActivity"
             android:exported="true"
