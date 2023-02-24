@@ -12,7 +12,6 @@ class MainHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(auth.currentUser!.email);
     var controller = Get.put(HomeController());
     print(Dimensions.screenHeight);
     var screens = [

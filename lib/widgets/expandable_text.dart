@@ -1,4 +1,5 @@
 import 'package:fresh_om_seller/const/const.dart';
+import 'package:fresh_om_seller/utils/reusable_big_text.dart';
 import 'package:fresh_om_seller/widgets/reusable_small_text.dart';
 
 class ExpadableText extends StatefulWidget {
@@ -37,8 +38,9 @@ class _ExpadableTextState extends State<ExpadableText> {
   Widget build(BuildContext context) {
     return Container(
         child: secondHalf.isEmpty
-            ? Text(
-                firstHalf,
+            ? SmallText(
+                text: firstHalf,
+                color: nicePurple,
               )
             : Column(
                 children: [
@@ -48,7 +50,7 @@ class _ExpadableTextState extends State<ExpadableText> {
                         : (firstHalf + secondHalf),
                     overFlow: TextOverflow.visible,
                     height: 1.6,
-                    color: mainAppColor,
+                    color: nicePurple,
                   ),
                   const SizedBox(
                     height: 10,
@@ -63,13 +65,13 @@ class _ExpadableTextState extends State<ExpadableText> {
                       children: [
                         Text(
                           "Show more",
-                          style: TextStyle(color: nicePurple),
+                          style: TextStyle(color: mainAppColor),
                         ),
                         Icon(
                           hiddenText
                               ? Icons.arrow_drop_down
                               : Icons.arrow_drop_up,
-                          color: nicePurple,
+                          color: mainAppColor,
                         )
                       ],
                     ),

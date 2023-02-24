@@ -51,10 +51,15 @@ class AddVegetable extends StatelessWidget {
                   },
                   child: controller.isLoading.value
                       ? progressIndicator(white)
-                      : "Save".text.white.size(Dimensions.fontSize18).make())
+                      : BigText(
+                          text: "Save",
+                          size: Dimensions.fontSize18,
+                          fontWeight: FontWeight.w600,
+                          color: white,
+                        ))
             ],
           ),
-          backgroundColor: mainAppColor,
+          backgroundColor: mainBackGround,
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Padding(
@@ -62,6 +67,7 @@ class AddVegetable extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Dimensions.height20.heightBox,
                   customTextField(
                       controller: controller.vNameController,
                       hint: "eg. Tomato",
@@ -90,7 +96,12 @@ class AddVegetable extends StatelessWidget {
                       isPassword: false,
                       isDesc: false),
                   Dimensions.height20.heightBox,
-                  normalText(text: "Choose product image", color: white),
+                  BigText(
+                    text: "Choose product image",
+                    fontWeight: FontWeight.w600,
+                    color: nicePurple,
+                    size: Dimensions.fontSize16,
+                  ),
                   Dimensions.height20.heightBox,
                   Align(
                     child: Container(
@@ -100,7 +111,7 @@ class AddVegetable extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(Dimensions.radius15),
-                          color: mainBackGround),
+                          color: Colors.grey[300]),
                       child: controller.productImage.isEmpty
                           ? Image.asset(cameraLogo)
                           : Image.file(File(controller.productImage.value),
@@ -110,20 +121,24 @@ class AddVegetable extends StatelessWidget {
                     }),
                   ),
                   Dimensions.height20.heightBox,
-                  normalText(text: "Uploading on", color: white),
+                  BigText(
+                    text: "Uploading on",
+                    fontWeight: FontWeight.w600,
+                    size: Dimensions.fontSize16,
+                    color: nicePurple,
+                  ),
                   Dimensions.height20.heightBox,
-                  intl.DateFormat('dd-MM-yyyy')
-                      .format(currentDate)
-                      .text
-                      .size(Dimensions.fontSize20)
-                      .semiBold
-                      .color(nicePurple)
-                      .make()
+                  BigText(
+                    text: intl.DateFormat('dd-MM-yyyy').format(currentDate),
+                    fontWeight: FontWeight.w700,
+                    size: Dimensions.fontSize18,
+                    color: white,
+                  )
                       .box
                       .roundedSM
                       .alignCenter
                       .height(Dimensions.height40)
-                      .color(mainBackGround)
+                      .color(mainAppColor)
                       .width(double.infinity)
                       .make(),
                   Dimensions.width10.heightBox,

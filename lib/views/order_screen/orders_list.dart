@@ -53,14 +53,7 @@ class OrdersList extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                      height: Dimensions.height350,
-                      width: Dimensions.screenWidth - 30,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radius10)),
-                      child: Lottie.asset(noOrders, fit: BoxFit.cover)),
+                  Lottie.asset(noOrders, fit: BoxFit.cover, repeat: false),
                   20.heightBox,
                   BigText(
                     text: "No Orders Yet",

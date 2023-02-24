@@ -8,6 +8,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
 class ProfileController extends GetxController {
+  @override
+  void onInit() {
+    profileDetails();
+    super.onInit();
+  }
+
+  @override
   late QueryDocumentSnapshot snapshotData;
 
   var profileImgPath = "".obs;
@@ -16,6 +23,7 @@ class ProfileController extends GetxController {
   var nameController = TextEditingController();
   var newPassController = TextEditingController();
   var oldPassController = TextEditingController();
+  late Map<String, dynamic> profileData;
 
   changeImg(context) async {
     try {
@@ -31,7 +39,7 @@ class ProfileController extends GetxController {
   uploadProfileImg() async {
     var fileName = basename(profileImgPath.value);
     var destination =
-        'sellerImages/${FirebaseAuth.instance.currentUser?.uid}/$fileName';
+        'sellerImages/${FirebaseAuth.instance.currentUser!.uid}/$fileName';
     Reference ref = FirebaseStorage.instance.ref().child(destination);
     await ref.putFile(File(profileImgPath.value));
 
@@ -58,5 +66,18 @@ class ProfileController extends GetxController {
     }).catchError((error) {
       Get.snackbar("Error occurred", error.toString());
     });
+  }
+
+// get buyer profile data from database
+
+  profileDetails() async {
+    var collection = fireStore.collection(sellerCollection);
+    var querySnapshot = await collection.get();
+    for (var queryDocumentSnapshot in querySnapshot.docs) {
+      Map<String, dynamic> data = queryDocumentSnapshot.data();
+      if (data['id'] ==  FirebaseAuth.instance.currentUser!.uid) {
+        profileData = data;
+      }
+    }
   }
 }

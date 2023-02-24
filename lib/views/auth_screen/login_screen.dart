@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/auth_controller.dart';
+import 'package:fresh_om_seller/controllers/profile_controller.dart';
 import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/auth_screen/Admin_verification_screen.dart';
 import 'package:fresh_om_seller/views/auth_screen/forgot_password.dart';
@@ -22,6 +24,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
   bool isRememberMe = true;
   bool isObscure = true;
   var controller = Get.put(AuthController());
+  var profileController = Get.put(ProfileController());
   var signUpeEmailController = TextEditingController();
   var signUpPasswordController = TextEditingController();
   var signUpConfirmPasswordController = TextEditingController();
@@ -32,23 +35,26 @@ class _MainLoginPageState extends State<MainLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         height:
             isSignUpScreen ? Dimensions.height167 : Dimensions.height100 * 2,
         child: Column(
           children: [
-            Image.asset("images/logoMain2.png", height: Dimensions.height90),
+            Image.asset(freshLogo, height: Dimensions.height70),
             Dimensions.height10.heightBox,
             appNameText(
-              text: 'Fresh\'Om',
-              fontWeight: FontWeight.w500,
-              size: Dimensions.fontSize25,
-              color: mainAppColor,
+              letterSpacing1: 0.0,
+              letterSpacing2: 0.0,
+              fontWeight1: FontWeight.w500,
+              fontWeight2: FontWeight.w700,
+              size: Dimensions.fontSize23,
+              color: nicePurple,
             ),
             BigText(
+              letterSpace: 0.0,
               text: "Seller",
-              fontWeight: FontWeight.w500,
-              color: mainAppColor,
+              fontWeight: FontWeight.w600,
+              color: nicePurple,
               size: Dimensions.fontSize16,
             ),
           ],
@@ -79,14 +85,14 @@ class _MainLoginPageState extends State<MainLoginPage> {
                               style: GoogleFonts.poppins(
                                   fontSize: Dimensions.fontSize25,
                                   color: Colors.white,
-                                  letterSpacing: 2),
+                                  letterSpacing: 1),
                               children: [
                                 TextSpan(
                                     text: isSignUpScreen
                                         ? " Fresh'Om,"
                                         : " Back,",
                                     style: GoogleFonts.poppins(
-                                      fontSize: Dimensions.fontSize27,
+                                      fontSize: Dimensions.fontSize30,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ))
@@ -94,19 +100,18 @@ class _MainLoginPageState extends State<MainLoginPage> {
                         ),
                       ],
                     ),
-                    5.heightBox,
                     isSignUpScreen
                         ? BigText(
                             text: "Signup to Continue",
                             fontWeight: FontWeight.w600,
-                            letterSpace: 2,
+                            letterSpace: 1,
                             color: Colors.white54,
                             size: Dimensions.fontSize18,
                           )
                         : BigText(
                             text: "SignIn to Continue",
                             fontWeight: FontWeight.w600,
-                            letterSpace: 2,
+                            letterSpace: 1,
                             color: Colors.white54,
                             size: Dimensions.fontSize18,
                           )
@@ -158,7 +163,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                   fontWeight: FontWeight.bold,
                                   color: isSignUpScreen
                                       ? inactiveTextColor
-                                      : mainAppColor,
+                                      : nicePurple,
                                   size: Dimensions.fontSize20,
                                 ),
                                 if (!isSignUpScreen)
@@ -183,7 +188,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                   text: "SIGNUP",
                                   fontWeight: FontWeight.bold,
                                   color: isSignUpScreen
-                                      ? mainAppColor
+                                      ? nicePurple
                                       : inactiveTextColor,
                                   size: Dimensions.fontSize20,
                                 ),
@@ -231,8 +236,8 @@ class _MainLoginPageState extends State<MainLoginPage> {
               },
               child: BigText(
                 text: "Forgot Password?",
-                fontWeight: FontWeight.bold,
-                color: mainAppColor,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[600],
                 size: Dimensions.fontSize15,
               ),
             ),
@@ -372,6 +377,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                     var sharedPref = await SharedPreferences.getInstance();
                     sharedPref.setBool('isLogged', true);
                     sharedPref.setBool('isVerified', false);
+                    await profileController.profileDetails();
                     Get.offAll(() => const VerificationScreen());
                   });
                   setState(() {
@@ -381,7 +387,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                   setState(() {
                     isLoading = false;
                   });
-                  auth.signOut();
+                  FirebaseAuth.instance.signOut();
                   Get.snackbar("Error", "Logged out --$e");
                 }
               } else {
@@ -393,8 +399,8 @@ class _MainLoginPageState extends State<MainLoginPage> {
               });
               await controller.signInMethod().then((value) async {
                 if (value != null) {
-                  // await controller.checkIsVerified();
                   await controller.checkUserInCollection(context);
+                  await profileController.profileDetails();
                   setState(() {
                     isLoading = false;
                   });

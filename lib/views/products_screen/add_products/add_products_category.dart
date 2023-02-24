@@ -40,7 +40,7 @@ class AddProducts extends StatelessWidget {
                   alignment: Alignment.center,
                   height: Dimensions.height100,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.grey[300]),
+                      shape: BoxShape.circle, color: Colors.grey[200]),
                   child: Container(
                     height: Dimensions.height85,
                     clipBehavior: Clip.antiAlias,
@@ -48,7 +48,7 @@ class AddProducts extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
-                      orangeImage,
+                      diffFruits,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -94,7 +94,7 @@ class AddProducts extends StatelessWidget {
                   alignment: Alignment.center,
                   height: Dimensions.height100,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.grey[300]),
+                      shape: BoxShape.circle, color: Colors.grey[200]),
                   child: Container(
                     height: Dimensions.height85,
                     clipBehavior: Clip.antiAlias,
@@ -102,18 +102,19 @@ class AddProducts extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
-                      brinjalImage,
+                      diffVeg,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 Dimensions.height10.heightBox,
                 //category text
-                vegetables.text.semiBold
-                    .size(Dimensions.fontSize23)
-                    .letterSpacing(1)
-                    .color(Colors.grey[900])
-                    .make(),
+                BigText(
+                  text: vegetables,
+                  fontWeight: FontWeight.w600,
+                  size: Dimensions.fontSize20,
+                  color: nicePurple,
+                ),
                 Dimensions.height15.heightBox,
                 ElevatedButton(
                     style:

@@ -25,24 +25,11 @@ class FruitCategory extends StatelessWidget {
           return progressIndicator(nicePurple);
         } else if (snapshot.data!.docs.isEmpty) {
           return Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                  height: Dimensions.height350,
-                  width: Dimensions.screenWidth - 30,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius10)),
-                  child: Lottie.asset(noOrders, fit: BoxFit.cover)),
-              20.heightBox,
-              BigText(
-                text: "You have not added any products",
-                fontWeight: FontWeight.w500,
-                size: Dimensions.fontSize18,
-                color: Colors.grey[600],
-              )
-            ],
+              child: BigText(
+            text: "You have not added any products",
+            fontWeight: FontWeight.w500,
+            size: Dimensions.fontSize18,
+            color: Colors.grey[600],
           ));
         } else {
           var data = snapshot.data!.docs;

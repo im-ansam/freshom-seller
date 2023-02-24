@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/profile_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
 import 'package:fresh_om_seller/utils/reusable_circular_indicator.dart';
+import 'package:fresh_om_seller/views/Notification/notification_screen.dart';
 import 'package:fresh_om_seller/views/auth_screen/login_screen.dart';
 import 'package:fresh_om_seller/views/profile_screen/edit_profile.dart';
 import 'package:fresh_om_seller/views/message_screens/messages_list.dart';
@@ -21,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: mainAppColor,
-        toolbarHeight: Dimensions.height80,
+        toolbarHeight: Dimensions.height60,
         elevation: 0,
         title: BigText(
           text: profile,
@@ -44,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
               onPressed: () async {
                 var sharedPref = await SharedPreferences.getInstance();
                 sharedPref.setBool('isLogged', false);
-                await auth.signOut();
+                await FirebaseAuth.instance.signOut();
 
                 Get.offAll(() => const MainLoginPage());
               },
@@ -53,9 +56,10 @@ class ProfileScreen extends StatelessWidget {
           10.widthBox
         ],
       ),
-      backgroundColor: mainAppColor,
+      backgroundColor: mainBackGround,
       body: Column(
         children: [
+          Dimensions.height20.heightBox,
           //top profile details row
           FutureBuilder(
             future: FireStoreServices.getProfile(
@@ -88,14 +92,14 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         BigText(
                           text: "${profileController.snapshotData['name']}",
-                          color: white,
+                          color: fontGrey,
                           fontWeight: FontWeight.w600,
                           size: Dimensions.fontSize18,
                         ),
                         Dimensions.width5.heightBox,
                         BigText(
                           text: "${profileController.snapshotData['email']}",
-                          color: white,
+                          color: nicePurple,
                           letterSpace: 1,
                           fontWeight: FontWeight.w500,
                           size: Dimensions.fontSize14,
@@ -115,27 +119,32 @@ class ProfileScreen extends StatelessWidget {
               padding: EdgeInsets.only(
                   left: Dimensions.width20, top: Dimensions.height20),
               child: ListView(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  ListTile(
-                    onTap: () {
-                      Get.to(() => const MessagesList());
-                    },
-                    leading: Icon(
-                      Icons.message_rounded,
-                      color: white,
-                      size: Dimensions.icon30,
-                    ),
-                    title: BigText(
-                      text: messages,
-                      color: white,
-                      fontWeight: FontWeight.w500,
-                      size: Dimensions.fontSize18,
-                    ),
-                  )
-                ],
-              ))
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  children: List.generate(profileIcons.length, (index) {
+                    return ListTile(
+                      onTap: () {
+                        switch (index) {
+                          case 0:
+                            Get.to(() => const MessagesList());
+                            break;
+                          case 1:
+                            Get.to(() => const NotificationScreen());
+                            break;
+                        }
+                      },
+                      leading: Icon(
+                        profileIcons[index],
+                        color: mainAppColor,
+                      ),
+                      title: BigText(
+                        text: profileString[index],
+                        color: fontGrey,
+                        fontWeight: FontWeight.w500,
+                        size: Dimensions.fontSize16,
+                      ),
+                    );
+                  })))
         ],
       ),
     );

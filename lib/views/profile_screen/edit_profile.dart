@@ -28,7 +28,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => (Scaffold(
-          backgroundColor: mainAppColor,
+          backgroundColor: mainBackGround,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             leading: const Icon(
@@ -88,11 +88,12 @@ class _EditProfileState extends State<EditProfile> {
                       },
                       child: isLoading.value
                           ? progressIndicator(white)
-                          : "Save"
-                              .text
-                              .size(Dimensions.fontSize18)
-                              .color(white)
-                              .make())
+                          : BigText(
+                              text: "Save",
+                              size: Dimensions.fontSize18,
+                              fontWeight: FontWeight.w600,
+                              color: white,
+                            ))
                   .paddingOnly(right: Dimensions.width10),
             ],
           ),
@@ -102,16 +103,17 @@ class _EditProfileState extends State<EditProfile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Dimensions.height20.heightBox,
                   //top profile image container
                   Container(
                     alignment: Alignment.center,
                     height: Dimensions.height140,
-                    decoration: const BoxDecoration(
-                        color: Colors.white54, shape: BoxShape.circle),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200], shape: BoxShape.circle),
                     child: Container(
                       clipBehavior: Clip.antiAlias,
                       height: Dimensions.height140,
-                      decoration: BoxDecoration(shape: BoxShape.circle),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
                       child: controller.snapshotData['imageUrl'] == "" &&
                               controller.profileImgPath.isEmpty
 
@@ -140,18 +142,22 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   Dimensions.height10.heightBox,
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: white),
-                      onPressed: () {
-                        controller.changeImg(context);
-                      },
-                      child: changeImage.text.semiBold
-                          .size(Dimensions.fontSize16)
-                          .color(fontGrey)
-                          .make()),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: mainAppColor),
+                    onPressed: () {
+                      controller.changeImg(context);
+                    },
+                    child: BigText(
+                      text: changeImage,
+                      size: Dimensions.fontSize15,
+                      fontWeight: FontWeight.w600,
+                      color: white,
+                    ),
+                  ),
                   Dimensions.height10.heightBox,
-                  const Divider(
+                  Divider(
                     thickness: 1,
-                    color: Colors.grey,
+                    color: Colors.grey[400],
                   ),
                   Dimensions.height10.heightBox,
                   customTextField(
@@ -165,9 +171,9 @@ class _EditProfileState extends State<EditProfile> {
                     alignment: Alignment.centerLeft,
                     child: BigText(
                       text: "Change your password",
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                       size: Dimensions.fontSize18,
-                      color: white,
+                      color: nicePurple,
                     ),
                   ),
                   Dimensions.height20.heightBox,

@@ -1,3 +1,4 @@
+import 'package:fresh_om_seller/controllers/profile_controller.dart';
 import 'package:fresh_om_seller/views/auth_screen/Admin_verification_screen.dart';
 import 'package:fresh_om_seller/views/auth_screen/login_screen.dart';
 import 'package:fresh_om_seller/views/home_screen/main_home.dart';
@@ -14,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  var controller = Get.put(ProfileController());
   changeScreen() async {
     var sharedPref = await SharedPreferences.getInstance();
     var isLoggedIn = sharedPref.getBool('isLogged');
@@ -36,60 +38,46 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     changeScreen();
+    controller.profileDetails();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: mainBackGround,
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: Dimensions.height300,
-            ),
-            // Container(
-            //   height: Dimensions.height120,
-            //   width: Dimensions.width50 * 2,
-            //   decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.only(
-            //           bottomLeft: Radius.circular(Dimensions.radius30),
-            //           topRight: Radius.circular(Dimensions.radius30)),
-            //       color: Colors.white70,
-            //       image: DecorationImage(
-            //           image: AssetImage('images/logoMain1.png'))),
-            // ),
-
+            20.heightBox,
             Image.asset(
-              'images/logoMain1.png',
-              height: 140,
+              'images/freshLogo.png',
+              height: 130,
             ),
-            SizedBox(
-              height: Dimensions.height10,
-            ),
+            Dimensions.height20.heightBox,
+            appNameText(
+                color: nicePurple,
+                size: Dimensions.fontSize25,
+                fontWeight1: FontWeight.w500,
+                fontWeight2: FontWeight.w700),
 
-            appNameText(
-                text: 'Fresh\'Om',
-                color: mainAppColor,
-                size: 30.0,
-                fontWeight: FontWeight.w500),
-            appNameText(
-                text: 'Seller',
-                color: mainAppColor,
-                size: 25.0,
-                fontWeight: FontWeight.w500),
+            BigText(
+              text: 'Seller',
+              fontWeight: FontWeight.w700,
+              color: nicePurple,
+              size: Dimensions.fontSize18,
+            ),
+            Dimensions.height10.heightBox,
             // BoldText(
             //   fontWeight: FontWeight.bold,
             //   text: "Fresh'Om",
             //   color: AppColors.mainAppColor,
             //   size: Dimensions.fontSize30,
             // ),
-            SizedBox(
-              height: Dimensions.height10,
-            ),
+
             SmallText(
               text: "version 1.0.0",
               color: Colors.grey[400],

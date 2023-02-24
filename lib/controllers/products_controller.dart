@@ -94,4 +94,12 @@ class ProductsController extends GetxController {
   removeFruits(docId) async {
     await fireStore.collection(fruitsCollection).doc(docId).delete();
   }
+
+  removeFruitsNotification(docId) async {
+    await fireStore.collection(deletedFruits).doc(docId).delete();
+  }
+
+  removeVegNotification(docId) async {
+    await fireStore.collection(deletedVeg).doc(docId).delete();
+  }
 }

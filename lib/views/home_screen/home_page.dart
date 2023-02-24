@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/home_controller.dart';
+import 'package:fresh_om_seller/controllers/profile_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
 import 'package:fresh_om_seller/utils/reusable_circular_indicator.dart';
 import 'package:fresh_om_seller/views/message_screens/messages_list.dart';
@@ -19,6 +20,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var homeController = Get.put(HomeController());
+    var profileController = Get.put(ProfileController());
+    profileController.profileDetails();
     homeController.update();
     return Scaffold(
       backgroundColor: mainBackGround,
@@ -32,9 +35,10 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BigText(
-              text: "Hi,  ${homeController.username}",
+              text:
+                  "Hi, ${profileController.profileData['name'] ?? "User"} ", //${homeController.username}
               fontWeight: FontWeight.w600,
-              color: mainAppColor,
+              color: nicePurple,
               size: Dimensions.fontSize20,
             ),
             Text(intl.DateFormat('EEE , MMM d,' 'yy').format(DateTime.now()),
@@ -45,28 +49,21 @@ class HomePage extends StatelessWidget {
           ],
         ),
         actions: [
-          FutureBuilder(
-            future: FireStoreServices.getProfile(
-                FirebaseAuth.instance.currentUser!.uid),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) {
-                return progressIndicator(mainAppColor);
-              } else {
-                var prof = snapshot.data!.docs[0];
-                return Container(
-                  height: Dimensions.height50,
-                  width: Dimensions.height50,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(prof['imageUrl']),
-                          fit: BoxFit.cover),
-                      shape: BoxShape.circle,
-                      color: Colors.grey),
-                ).paddingOnly(right: Dimensions.width15);
-              }
-            },
-          )
+          Container(
+            clipBehavior: Clip.antiAlias,
+            height: Dimensions.height50,
+            width: Dimensions.height50,
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+            child: profileController.profileData['imageUrl'] != null
+                ? Image.network(
+                    profileController.profileData['imageUrl'],
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    cameraLogo,
+                  ),
+          ).paddingOnly(right: Dimensions.width15)
         ],
       ),
       body: SingleChildScrollView(
@@ -139,11 +136,6 @@ class HomePage extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.radius15),
-                                // gradient: LinearGradient(
-                                //     // tileMode: TileMode.repeated,
-                                //     colors: [nicePurple, niceBlue])
-
-                                //try this also
                                 color: mainAppColor),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -236,11 +228,6 @@ class HomePage extends StatelessWidget {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                       Dimensions.radius15),
-                                  // gradient: LinearGradient(
-                                  //     // tileMode: TileMode.repeated,
-                                  //     colors: [nicePurple, niceBlue])
-
-                                  //try this also
                                   color: mainAppColor),
                               child: Row(
                                 mainAxisAlignment:
@@ -356,7 +343,7 @@ class HomePage extends StatelessWidget {
                                 text: "${veggies[index]['v_name']}",
                                 fontWeight: FontWeight.w700,
                                 size: Dimensions.fontSize16,
-                                color: Colors.grey[800],
+                                color: nicePurple,
                               ),
                               subtitle: "Rs.${veggies[index]['v_price']}"
                                   .text
@@ -440,7 +427,7 @@ class HomePage extends StatelessWidget {
                                 text: "${fruits[index]['f_name']}",
                                 fontWeight: FontWeight.w700,
                                 size: Dimensions.fontSize16,
-                                color: Colors.grey[800],
+                                color: nicePurple,
                               ),
                               subtitle: "Rs.40"
                                   .text

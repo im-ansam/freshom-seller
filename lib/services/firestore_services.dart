@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/const/firebase_const.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -107,5 +108,19 @@ class FireStoreServices {
       }),
     ]);
     return res;
+  }
+
+  static getDeletedVeg(uid) {
+    return fireStore
+        .collection(deletedVeg)
+        .where('seller_id', isEqualTo: uid)
+        .snapshots();
+  }
+
+  static getDeletedFruits(uid) {
+    return fireStore
+        .collection(deletedFruits)
+        .where('seller_id', isEqualTo: uid)
+        .snapshots();
   }
 }

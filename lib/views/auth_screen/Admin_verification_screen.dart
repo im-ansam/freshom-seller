@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
+import 'package:fresh_om_seller/controllers/profile_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
 import 'package:fresh_om_seller/utils/reusable_text.dart';
 import 'package:fresh_om_seller/views/home_screen/main_home.dart';
@@ -14,6 +15,7 @@ class VerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProfileController());
     return Scaffold(
       backgroundColor: lightBlue1,
       body: StreamBuilder(
@@ -60,6 +62,7 @@ class VerificationScreen extends StatelessWidget {
                           .make()
                           .onTap(() async {
                         var sharedPref = await SharedPreferences.getInstance();
+                        await controller.profileDetails();
                         sharedPref.setBool('isVerified', true);
                         Get.offAll(() => const MainHome());
                       })

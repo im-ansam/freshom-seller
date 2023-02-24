@@ -29,7 +29,8 @@ const Color niceDarkViolet = Color(0xff525b9d);
 const Color white = Colors.white;
 
 //try colors
-const Color mainAppColor = Color(0xff136050); //0xff136050
+const Color mainAppColor =
+    Color(0xff04843c); //0xff136050//6cbb48//0xff04843c//04a44b
 const Color newLightGreen = Color(0xff01ba9b);
 const Color green = Color(0xff35b678);
 const Color gPayGreen = Color(0xff29a952);

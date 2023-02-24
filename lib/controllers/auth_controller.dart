@@ -1,22 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_om_seller/const/const.dart';
+import 'package:fresh_om_seller/controllers/profile_controller.dart';
 import 'package:fresh_om_seller/views/auth_screen/Admin_verification_screen.dart';
 import 'package:fresh_om_seller/views/home_screen/main_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
+  @override
   var loading = false.obs;
   var emailController = TextEditingController();
 
   var passwordController = TextEditingController();
+  var profileController = Get.put(ProfileController());
 
   //login
   Future<UserCredential?> signInMethod() async {
     UserCredential? userCredential;
 
     try {
-      userCredential = await auth.signInWithEmailAndPassword(
+      userCredential = await  FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       loading.value = false;
       emailController.clear();
@@ -33,7 +36,7 @@ class AuthController extends GetxController {
     UserCredential? userCredential;
 
     try {
-      userCredential = await auth.createUserWithEmailAndPassword(
+      userCredential = await  FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email, password: password);
       await verifyEmail();
     } on FirebaseAuthException catch (e) {
@@ -46,7 +49,7 @@ class AuthController extends GetxController {
 
   resetPassword({emailController, context}) async {
     try {
-      await auth.sendPasswordResetEmail(email: emailController);
+      await  FirebaseAuth.instance.sendPasswordResetEmail(email: emailController);
       VxToast.show(context,
           msg: "A password reset link have been sent to this email");
     } catch (e) {
@@ -60,6 +63,7 @@ class AuthController extends GetxController {
         .collection(sellerCollection)
         .doc(FirebaseAuth.instance.currentUser!.uid);
     store.set({
+      'register_date': DateTime.now(),
       'name': name,
       'password': password,
       'email': email,
@@ -75,14 +79,14 @@ class AuthController extends GetxController {
 //SignOut method
   signOutMethod(context) async {
     try {
-      await auth.signOut();
+      await  FirebaseAuth.instance.signOut();
     } catch (e) {
       VxToast.show(context, msg: e.toString());
     }
   }
 
   verifyEmail() async {
-    await auth.currentUser!.sendEmailVerification();
+    await  FirebaseAuth.instance.currentUser!.sendEmailVerification();
     Get.snackbar('email', 'send');
   }
 
@@ -95,13 +99,13 @@ class AuthController extends GetxController {
     for (var queryDocumentSnapshot in querySnapshot.docs) {
       Map<String, dynamic> data = queryDocumentSnapshot.data();
 
-      if (data['email'] == auth.currentUser!.email) {
+      if (data['email'] == FirebaseAuth.instance.currentUser!.email) {
         checkUser = 1;
       }
     }
 
     if (checkUser == 0) {
-      auth.signOut();
+      FirebaseAuth.instance.signOut();
       Get.snackbar('Error', "your are not a user");
       emailController.clear();
       passwordController.clear();
@@ -125,6 +129,7 @@ class AuthController extends GetxController {
         var sharedPref = await SharedPreferences.getInstance();
         sharedPref.setBool('isLogged', true);
         sharedPref.setBool('isVerified', true);
+        await profileController.profileDetails();
         Get.offAll(() => const MainHome());
         return;
       } else {

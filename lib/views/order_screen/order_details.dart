@@ -253,12 +253,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                       width: Dimensions.width50 * 2,
                       color: Colors.grey.shade400,
                     ),
-                    "Ordered Products"
-                        .text
-                        .semiBold
-                        .color(nicePurple)
-                        .size(Dimensions.fontSize20)
-                        .makeCentered(),
+                    Align(
+                        alignment: Alignment.center,
+                        child: BigText(
+                          text: "Ordered Products",
+                          fontWeight: FontWeight.w600,
+                          size: Dimensions.fontSize18,
+                          color: nicePurple,
+                        )),
                     Container(
                       height: 1,
                       width: Dimensions.width50 * 2,

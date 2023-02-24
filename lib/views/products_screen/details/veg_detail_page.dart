@@ -33,8 +33,7 @@ class VegDetail extends StatelessWidget {
           //buttons
           Positioned(
             top: Dimensions.height55,
-            left: Dimensions.height20,
-            right: Dimensions.height20,
+            left: Dimensions.height10,
             child: CircleAvatar(
                 radius: Dimensions.radius18,
                 backgroundColor: lightGreen1,

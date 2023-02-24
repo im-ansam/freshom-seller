@@ -40,24 +40,27 @@ class _ResetPasswordState extends State<ResetPassword> {
                       Align(
                         alignment: Alignment.topCenter,
                         child: appNameText(
-                            text: 'Fresh\'Om',
-                            color: Colors.white,
-                            size: Dimensions.fontSize50,
-                            fontWeight: FontWeight.w500),
+                          letterSpacing1: 0.0,
+                          letterSpacing2: 0.0,
+                          color: Colors.white,
+                          size: Dimensions.fontSize50,
+                          fontWeight1: FontWeight.w500,
+                          fontWeight2: FontWeight.w700,
+                        ),
                       ),
                       Dimensions.height10.heightBox,
                       RichText(
                         text: TextSpan(
                             text: "Reset your",
                             style: TextStyle(
-                                fontSize: Dimensions.fontSize25,
+                                fontSize: Dimensions.fontSize23,
                                 color: Colors.white,
                                 letterSpacing: 2),
                             children: [
                               TextSpan(
                                   text: " Password,",
                                   style: TextStyle(
-                                    fontSize: Dimensions.fontSize30,
+                                    fontSize: Dimensions.fontSize27,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ))
