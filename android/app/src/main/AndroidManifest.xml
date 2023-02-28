@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fresh_om_seller">
    <application
-        android:label="fresh_om_seller"
+        android:label="Fresh\'Om\nSeller"
         android:name="${applicationName}"
-        android:icon="@mipmap/fresh">
+        android:icon="@mipmap/fresh_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"

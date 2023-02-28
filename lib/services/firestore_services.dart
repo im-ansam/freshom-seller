@@ -106,6 +106,20 @@ class FireStoreServices {
           .then((value) {
         return value.docs.length;
       }),
+      fireStore
+          .collection(deletedVeg)
+          .where('seller_id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .get()
+          .then((value) {
+        return value.docs.length;
+      }),
+      fireStore
+          .collection(deletedFruits)
+          .where('seller_id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .get()
+          .then((value) {
+        return value.docs.length;
+      }),
     ]);
     return res;
   }

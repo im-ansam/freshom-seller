@@ -7,6 +7,8 @@ import 'package:fresh_om_seller/views/products_screen/add_products/add_products_
 import 'package:fresh_om_seller/views/products_screen/products_screen.dart';
 import 'package:fresh_om_seller/views/profile_screen/profile_sceen.dart';
 
+import '../../utils/exitDialog.dart';
+
 class MainHome extends StatelessWidget {
   const MainHome({Key? key}) : super(key: key);
 
@@ -54,26 +56,35 @@ class MainHome extends StatelessWidget {
           ),
           label: profile)
     ];
-    return Scaffold(
-      backgroundColor: mainBackGround,
-      bottomNavigationBar: Obx(() => BottomNavigationBar(
-            selectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
-            currentIndex: controller.navIndex.value,
-            onTap: (index) {
-              controller.navIndex.value = index;
-            },
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: mainBackGround,
-            elevation: 0,
-            selectedItemColor: mainAppColor,
-            unselectedItemColor: Colors.grey.shade600,
-            items: bottomNavBar,
-          )),
-      body: Column(
-        children: [
-          Obx(() =>
-              Expanded(child: screens.elementAt(controller.navIndex.value)))
-        ],
+    return WillPopScope(
+      onWillPop: () async {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) => exitDialog(context));
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: mainBackGround,
+        bottomNavigationBar: Obx(() => BottomNavigationBar(
+              selectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
+              currentIndex: controller.navIndex.value,
+              onTap: (index) {
+                controller.navIndex.value = index;
+              },
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: mainBackGround,
+              elevation: 0,
+              selectedItemColor: mainAppColor,
+              unselectedItemColor: Colors.grey.shade600,
+              items: bottomNavBar,
+            )),
+        body: Column(
+          children: [
+            Obx(() =>
+                Expanded(child: screens.elementAt(controller.navIndex.value)))
+          ],
+        ),
       ),
     );
   }

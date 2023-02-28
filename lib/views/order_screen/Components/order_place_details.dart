@@ -1,5 +1,6 @@
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/utils/reusable_big_text.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget orderPlaceDetails({data, title1, title2, d1, d2}) {
   return Padding(
@@ -10,15 +11,15 @@ Widget orderPlaceDetails({data, title1, title2, d1, d2}) {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            "$title1"
-                .text
-                .size(Dimensions.fontSize18)
-                .semiBold
-                .color(nicePurple)
-                .make(),
+            BigText(
+              text: "$title1",
+              fontWeight: FontWeight.w700,
+              size: Dimensions.fontSize15,
+              color: nicePurple,
+            ),
             BigText(
               text: "$d1",
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w500,
               size: Dimensions.fontSize16,
               color: orangeRed,
               overFlow: TextOverflow.ellipsis,
@@ -32,9 +33,10 @@ Widget orderPlaceDetails({data, title1, title2, d1, d2}) {
             children: [
               "$title2"
                   .text
-                  .size(Dimensions.fontSize16)
-                  .semiBold
-                  .color(nicePurple)
+                  .textStyle(GoogleFonts.poppins(
+                      color: nicePurple,
+                      fontSize: Dimensions.fontSize15,
+                      fontWeight: FontWeight.w700))
                   .make(),
               "$d2"
                   .text
@@ -54,8 +56,13 @@ Widget addressDetails({data, leading}) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      "$leading".text.semiBold.color(Colors.grey.shade800).make(),
-      10.widthBox,
+      "$leading"
+          .text
+          .semiBold
+          .textStyle(const TextStyle(fontWeight: FontWeight.w600))
+          .color(nicePurple)
+          .make(),
+      Dimensions.height10.widthBox,
       SizedBox(
         width: Dimensions.height110,
         child: "$data".text.semiBold.color(Colors.grey.shade800).make(),

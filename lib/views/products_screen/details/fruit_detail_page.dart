@@ -32,12 +32,12 @@ class FruitDetail extends StatelessWidget {
             top: Dimensions.height55,
             left: Dimensions.height10,
             child: CircleAvatar(
-                radius: Dimensions.radius18,
+                radius: Dimensions.radius15,
                 backgroundColor: lightGreen1,
                 child: Icon(
                   Icons.clear,
                   color: nicePurple,
-                  size: Dimensions.icon25,
+                  size: Dimensions.icon20,
                 )).onTap(() {
               Get.back();
             }),

@@ -37,16 +37,30 @@ class _ResetPasswordState extends State<ResetPassword> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: appNameText(
-                          letterSpacing1: 0.0,
-                          letterSpacing2: 0.0,
-                          color: Colors.white,
-                          size: Dimensions.fontSize50,
-                          fontWeight1: FontWeight.w500,
-                          fontWeight2: FontWeight.w700,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          appNameText(
+                            letterSpacing1: 0.0,
+                            letterSpacing2: 0.0,
+                            color: Colors.white,
+                            size: Dimensions.fontSize40,
+                            fontWeight1: FontWeight.w500,
+                            fontWeight2: FontWeight.w700,
+                          ),
+                          10.widthBox,
+                          Container(
+                            padding: EdgeInsets.all(Dimensions.width5),
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: Colors.white),
+                            child: Image.asset(
+                              'images/freshLogo.png',
+                              height: 40,
+                            ),
+                          )
+                        ],
                       ),
                       Dimensions.height10.heightBox,
                       RichText(
@@ -54,7 +68,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                             text: "Reset your",
                             style: TextStyle(
                                 fontSize: Dimensions.fontSize23,
-                                color: Colors.white,
+                                color: Colors.white70,
                                 letterSpacing: 2),
                             children: [
                               TextSpan(
@@ -62,7 +76,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   style: TextStyle(
                                     fontSize: Dimensions.fontSize27,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                    color: Colors.white70,
                                   ))
                             ]),
                       ),

@@ -140,9 +140,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       .box
                       .outerShadowMd
                       .color(mainBackGround)
-                      .roundedSM
                       .margin(EdgeInsets.only(top: Dimensions.height10))
-                      .width(Dimensions.height360 - Dimensions.height10)
                       .make(),
                 ),
                 Dimensions.height10.heightBox,
@@ -182,12 +180,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            "Delivery Address"
-                                .text
-                                .semiBold
-                                .size(Dimensions.fontSize15)
-                                .color(nicePurple)
-                                .make(),
+                            BigText(
+                              text: "Delivery Address",
+                              fontWeight: FontWeight.w700,
+                              size: Dimensions.fontSize15,
+                              color: nicePurple,
+                            ),
                             addressDetails(
                                 data: widget.data["order_by_name"],
                                 leading: "Name    :"),
@@ -215,12 +213,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              "Total Amount"
-                                  .text
-                                  .semiBold
-                                  .size(Dimensions.fontSize16)
-                                  .color(nicePurple)
-                                  .make(),
+                              BigText(
+                                text: "Total Amount",
+                                fontWeight: FontWeight.w700,
+                                size: Dimensions.fontSize16,
+                                color: nicePurple,
+                              ),
                               Dimensions.height30.heightBox,
                               "Rs.${widget.data['total_amount']}"
                                   .text
@@ -239,9 +237,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                     .outerShadowMd
                     .padding(EdgeInsets.all(Dimensions.width13))
                     .color(mainBackGround)
-                    .roundedSM
-                    .width(Dimensions.height370)
-                    .width(Dimensions.height360)
                     .make(),
                 Dimensions.height20.heightBox,
                 Row(
@@ -296,9 +291,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     .box
                     .outerShadowMd
                     .padding(EdgeInsets.all(Dimensions.height12))
-                    .width(Dimensions.height370)
                     .color(mainBackGround)
-                    .roundedSM
                     .make(),
                 Dimensions.height50.heightBox
               ],

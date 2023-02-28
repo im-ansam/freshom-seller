@@ -52,10 +52,10 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            20.heightBox,
+            30.heightBox,
             Image.asset(
               'images/freshLogo.png',
-              height: 130,
+              height: Dimensions.height120,
             ),
             Dimensions.height20.heightBox,
             appNameText(

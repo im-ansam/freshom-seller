@@ -12,3 +12,5 @@ const messagesCollection = "messages";
 const ordersCollection = "orders";
 const vegetableCollection = "Vegetables";
 const fruitsCollection = "Fruits";
+const deletedVeg = "Deleted Veg";
+const deletedFruits = "Deleted Fruits";

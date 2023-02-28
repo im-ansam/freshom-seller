@@ -40,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
                     ));
               },
               icon: const Icon(
-                Icons.edit,
+                Icons.settings,
                 color: white,
               )),
           TextButton(

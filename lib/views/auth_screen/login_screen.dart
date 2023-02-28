@@ -7,7 +7,6 @@ import 'package:fresh_om_seller/views/auth_screen/Admin_verification_screen.dart
 import 'package:fresh_om_seller/views/auth_screen/forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/reusable_big_text.dart';
-import '../home_screen/main_home.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 bool isLoading = false;
