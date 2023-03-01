@@ -29,7 +29,7 @@ class NotificationScreen extends StatelessWidget {
       body: Column(
         children: [
           BigText(
-            text: "Deleted Fruits",
+            text: "Expired Fruits",
             fontWeight: FontWeight.w500,
             size: Dimensions.fontSize18,
             color: Colors.grey[900],
@@ -101,7 +101,7 @@ class NotificationScreen extends StatelessWidget {
           ),
           Dimensions.height20.heightBox,
           BigText(
-            text: "Deleted Vegetables",
+            text: "Expired Vegetables",
             fontWeight: FontWeight.w500,
             size: Dimensions.fontSize18,
             color: Colors.grey[900],

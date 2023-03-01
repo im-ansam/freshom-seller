@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
     var profileController = Get.put(ProfileController());
     profileController.profileDetails();
     homeController.update();
+    print(Dimensions.screenWidth);
     return Scaffold(
       backgroundColor: mainBackGround,
       appBar: AppBar(
@@ -89,14 +90,14 @@ class HomePage extends StatelessWidget {
                     children: [
                       //top three container main row
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
                             height: Dimensions.height90,
-                            width: Dimensions.height120,
+                            width: Dimensions.screenWidth / 3.5702,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.circular(Dimensions.radius15),
+                                    BorderRadius.circular(Dimensions.radius10),
                                 color: mainAppColor),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -122,73 +123,73 @@ class HomePage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Stack(
-                            children: [
-                              Container(
-                                height: Dimensions.height90,
-                                width: Dimensions.height120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.radius15),
-                                    color: mainAppColor),
-                                child: Stack(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
-                                  alignment: Alignment.center,
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    //notifications text
-                                    Positioned(
-                                      top: Dimensions.height10,
-                                      child: BigText(
-                                        text: "Notifications",
-                                        fontWeight: FontWeight.bold,
-                                        size: Dimensions.fontSize15,
-                                        color: white,
-                                      ),
-                                    ),
-                                    //notifications icon
-                                    Positioned(
-                                      top: Dimensions.height50,
-                                      child: Icon(
-                                        Icons.notifications,
-                                        color: white,
-                                        size: Dimensions.icon30,
-                                      ),
-                                    ),
-                                    //notifications count circle
-                                    Positioned(
-                                        top: Dimensions.height45,
-                                        right: Dimensions.height45,
-                                        child: countData[4] + countData[5] == 0
-                                            ? Container()
-                                            : CircleAvatar(
-                                                radius: Dimensions.radius10,
-                                                backgroundColor: Colors.yellow,
-                                                child: Text(
-                                                  "${countData[4] + countData[5]}",
-                                                  style: const TextStyle(
-                                                      color: Vx.black),
-                                                ),
-                                              ))
-                                  ],
+
+                          //notifications
+                          Container(
+                            height: Dimensions.height90,
+                            width: Dimensions.screenWidth / 3.5702,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius10),
+                                color: mainAppColor),
+                            child: Stack(
+                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              // crossAxisAlignment: CrossAxisAlignment.center,
+                              alignment: Alignment.center,
+                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              // crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                //notifications text
+                                Positioned(
+                                  top: Dimensions.height10,
+                                  child: BigText(
+                                    text: "Notifications",
+                                    fontWeight: FontWeight.bold,
+                                    size: Dimensions.fontSize15,
+                                    color: white,
+                                  ),
                                 ),
-                              ).onTap(() {
-                                Get.to(() => const NotificationScreen());
-                              }),
-                            ],
-                          ),
+                                //notifications icon
+                                Positioned(
+                                  top: Dimensions.height50,
+                                  child: Icon(
+                                    Icons.notifications,
+                                    color: white,
+                                    size: Dimensions.icon30,
+                                  ),
+                                ),
+                                //notifications count circle
+                                Positioned(
+                                    top: Dimensions.height45,
+                                    right: Dimensions.height45,
+                                    child: countData[4] + countData[5] == 0
+                                        ? Container()
+                                        : CircleAvatar(
+                                            radius: Dimensions.radius10,
+                                            backgroundColor: Colors.yellow,
+                                            child: Text(
+                                              "${countData[4] + countData[5]}",
+                                              style: const TextStyle(
+                                                  color: Vx.black),
+                                            ),
+                                          ))
+                              ],
+                            ),
+                          ).onTap(() {
+                            Get.to(() => const NotificationScreen());
+                          }),
+
+                          //messages container
                           GestureDetector(
                             onTap: () {
                               Get.to(() => const MessagesList());
                             },
                             child: Container(
                               height: Dimensions.height90,
-                              width: Dimensions.height120,
+                              width: Dimensions.screenWidth / 3.5702,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
-                                      Dimensions.radius15),
+                                      Dimensions.radius10),
                                   color: mainAppColor),
                               child: Column(
                                 mainAxisAlignment:
@@ -217,17 +218,18 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                         ],
-                      ),
+                      ).paddingOnly(
+                          left: Dimensions.screenWidth / 39.273, right: 10),
                       10.heightBox,
                       //below three container main row
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           //logout container
                           Container(
                             padding: EdgeInsets.only(top: Dimensions.height15),
                             height: Dimensions.height90,
-                            width: Dimensions.height120,
+                            width: Dimensions.screenWidth / 3.5702,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.radius10),
@@ -262,7 +264,7 @@ class HomePage extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(top: Dimensions.height15),
                             height: Dimensions.height90,
-                            width: Dimensions.height120,
+                            width: Dimensions.screenWidth / 3.5702,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.radius10),
@@ -291,7 +293,7 @@ class HomePage extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(top: Dimensions.height15),
                             height: Dimensions.height90,
-                            width: Dimensions.height120,
+                            width: Dimensions.screenWidth / 3.5702,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.radius10),
@@ -317,7 +319,8 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                         ],
-                      ),
+                      ).paddingOnly(
+                          left: Dimensions.screenWidth / 39.273, right: 10),
                     ],
                   );
                 }

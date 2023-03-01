@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:fresh_om_seller/const/const.dart';
 import 'package:fresh_om_seller/controllers/profile_controller.dart';
 import 'package:fresh_om_seller/services/firestore_services.dart';
@@ -15,9 +16,164 @@ class VerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const ansamNumber = '9061383059';
+    const alanNumber = '9961314409';
+    const basilNumber = '9207142244';
+    const archanaNumber = '8086393456';
     var controller = Get.put(ProfileController());
     return Scaffold(
       backgroundColor: lightBlue1,
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BigText(
+            text: contactUs,
+            fontWeight: FontWeight.w600,
+            size: Dimensions.fontSize12,
+            color: Colors.grey[500],
+          ),
+          5.widthBox,
+          const Icon(
+            Icons.info_rounded,
+            color: mainAppColor,
+          ).onTap(() {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    title: const BigText(
+                      fontWeight: FontWeight.w600,
+                      text: "Call us on mobile",
+                      color: nicePurple,
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Divider(
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BigText(
+                              fontWeight: FontWeight.w600,
+                              text: "Ansam -",
+                              size: Dimensions.fontSize15,
+                              color: fontGrey,
+                            ),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        mainAppColor)),
+                                onPressed: () async {
+                                  await FlutterPhoneDirectCaller.callNumber(
+                                      ansamNumber);
+                                },
+                                child: BigText(
+                                  text: "Call",
+                                  fontWeight: FontWeight.w500,
+                                  size: Dimensions.fontSize15,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BigText(
+                              fontWeight: FontWeight.w600,
+                              text: "Alan Sabu -",
+                              size: Dimensions.fontSize15,
+                              color: fontGrey,
+                            ),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        mainAppColor)),
+                                onPressed: () async {
+                                  await FlutterPhoneDirectCaller.callNumber(
+                                      alanNumber);
+                                },
+                                child: BigText(
+                                  text: "Call",
+                                  fontWeight: FontWeight.w500,
+                                  size: Dimensions.fontSize15,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BigText(
+                              fontWeight: FontWeight.w600,
+                              text: "Basil CG -",
+                              size: Dimensions.fontSize15,
+                              color: fontGrey,
+                            ),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        mainAppColor)),
+                                onPressed: () async {
+                                  await FlutterPhoneDirectCaller.callNumber(
+                                      basilNumber);
+                                },
+                                child: BigText(
+                                  text: "Call",
+                                  fontWeight: FontWeight.w500,
+                                  size: Dimensions.fontSize15,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BigText(
+                              fontWeight: FontWeight.w600,
+                              text: "Archana -",
+                              size: Dimensions.fontSize15,
+                              color: fontGrey,
+                            ),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        mainAppColor)),
+                                onPressed: () async {
+                                  await FlutterPhoneDirectCaller.callNumber(
+                                      archanaNumber);
+                                },
+                                child: BigText(
+                                  text: "Call",
+                                  fontWeight: FontWeight.w500,
+                                  size: Dimensions.fontSize15,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                      ],
+                    ),
+                  );
+                });
+          })
+        ],
+      ).paddingOnly(bottom: 5),
       body: StreamBuilder(
         stream:
             FireStoreServices.getUser(FirebaseAuth.instance.currentUser!.uid),
